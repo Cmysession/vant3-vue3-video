@@ -2,57 +2,47 @@
     <div>
 
         <div id="home-content">
-            <!-- 头部 -->
-            <header id="home-index-top">
-                <!-- LOGO -->
-                <div class="logo-box">
-                    <img class="logo-img" :src="init.logo">
-                    <div class="logo-title">YouTuBe</div>
+            <div :style="{ 'margin-top': init.initScrollNum + 'vh' }" class="header-box">
+                <!-- 头部 -->
+                <header id="home-index-top">
+                    <!-- LOGO -->
+                    <div class="logo-box">
+                        <img class="logo-img" :src="init.logo">
+                        <div class="logo-title">YouTuBe</div>
+                    </div>
+                    <!-- 搜索 -->
+                    <div class="search-box">
+                        <van-icon name="search" color="#FFFFFF" size="28" />
+                    </div>
+                    <!-- 我的信息 -->
+                    <div class="user-box">
+                        <van-icon name="user-circle-o" color="#FFFFFF" size="28" />
+                    </div>
+                </header>
+                <!-- 分类 -->
+                <div id="sort">
+                    <van-button v-for="(item) in init.sortLists" @click="sortOnClick(item.uid)" :key="item.uid"
+                        v-bind:class="[item.uid === init.sortChecked ? 'checked' : '', 'sort-btn']">{{ item.title }}
+                    </van-button>
                 </div>
-                <!-- 搜索 -->
-                <div class="search-box">
-                    <van-icon name="search" color="#FFFFFF" size="28" />
-                </div>
-                <!-- 我的信息 -->
-                <div class="user-box">
-                    <van-icon name="user-circle-o" color="#FFFFFF" size="28" />
-                </div>
-            </header>
-            <!-- 分类 -->
-            <div id="sort">
-                <van-button v-for="(item) in init.sortLists" @click="sortOnClick(item.uid)" :key="item.uid"
-                    v-bind:class="[item.uid === init.sortChecked ? 'checked' : '', 'sort-btn']">{{ item.title }}
-                </van-button>
             </div>
             <!-- 内容页面 -->
-            <div id="data-list-box">
-                <div class="item-box" v-for="(item, index) in init.dataLists" :key="index">
-                    <!-- 封面 -->
-                    <div class="cover-box">
-                        <img :src="item.cover">
-                        <div class="times-box">{{ item.times }}</div>
+            <div id="data-list-box" @scroll="dataScroll">
+                <van-list v-model:loading="init.loading" :finished="init.finished" finished-text="没有更多了" @load="onLoad">
+                    <div class="item-box" v-for="(item, index) in init.dataLists" :key="index">
+                        <div class="cover-box">
+                            <img :src="item.cover">
+                            <div class="times-box">{{ item.times }}</div>
+                        </div>
+                        <div class="title-box">
+                            {{ item.title }}
+                        </div>
+                        <div class="info-box">
+                            <div><span class="dian">.</span>{{ item.views }}次观看</div>
+                            <div><span class="dian">.</span>{{ item.history }}</div>
+                        </div>
                     </div>
-                    <div class="title-box">
-                        {{ item.title }}
-                    </div>
-                    <div class="info-box">
-                        <div><span class="dian">.</span>{{ item.views }}次观看</div>
-                        <div><span class="dian">.</span>{{ item.history }}</div>
-                    </div>
-                </div>
-                <!-- <div class="item-box">
-                    <div class="cover-box">
-                        <img src="https://i.ytimg.com/vi/q2zj74iK1MI/hqdefault.jpg">
-                        <div class="times-box">1:07:35</div>
-                    </div>
-                    <div class="title-box">
-                        小米34寸带鱼屏显示器对比体验，不输三星和宏碁，看完就知道该买谁了！
-                    </div>
-                    <div class="info-box">
-                        <div><span class="dian">.</span>92323次观看</div>
-                        <div><span class="dian">.</span>1天前</div>
-                    </div>
-                </div> -->
+                </van-list>
             </div>
         </div>
 
@@ -60,7 +50,7 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { onMounted, reactive } from 'vue'
 export default {
     setup() {
         const init = reactive({
@@ -84,6 +74,13 @@ export default {
                     history: '2021-01-03 12:30',
                 },
                 {
+                    cover: 'https://i.ytimg.com/vi/q2zj74iK1MI/hqdefault.jpg',
+                    title: '合辑 - 房東的貓 - 【春風十里】MV 我說所有的酒都不如你',
+                    times: '0:15',
+                    views: '1000',
+                    history: '2021-01-03 12:30',
+                },
+                {
                     cover: 'https://i.ytimg.com/vi/7ev9uLONeQo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBLeAnXvkPSrr9_6oICQK5Q9i7PhA',
                     title: '【小品】《你好！打劫》#文松 #杨树林 #田娃 #娇娇 #贾舒涵 — 蠢贼误闯片场遇同行，打劫不成转演戏~【SMG上海东方卫视欢乐频道】',
                     times: '13:15',
@@ -97,25 +94,103 @@ export default {
                     views: '1000',
                     history: '2021-01-03 12:30',
                 },
-                {
-                    cover: 'https://i.ytimg.com/vi/q2zj74iK1MI/hqdefault.jpg',
-                    title: '合辑 - 房東的貓 - 【春風十里】MV 我說所有的酒都不如你',
-                    times: '0:15',
-                    views: '1000',
-                    history: '2021-01-03 12:30',
-                },
+
             ],
+            loading: false,
+            finished: false,
+            initScroll: 0,
+            initScrollNum: 0,
+            isShowScroll: true
         })
+
+        const onLoad = () => {
+            // 异步更新数据
+            // setTimeout 仅做示例，真实场景中一般为 ajax 请求
+            setTimeout(() => {
+                for (let i = 0; i < 10; i++) {
+                    init.dataLists.push({
+                        cover: 'https://i.ytimg.com/vi/nhUNJhM_NAk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAsb3JqJRzblxGurHeuZ7RQGiWq1w',
+                        title: '小米34寸带鱼屏显示器对比体验，不输三星和宏碁，看完就知道该买谁了！',
+                        times: '9:37',
+                        views: '1000',
+                        history: '2021-01-03 12:30',
+                    });
+                }
+                // 加载状态结束
+                init.loading = false;
+                // 数据全部加载完成
+                if (init.dataLists.length >= 40) {
+                    init.finished = true;
+                }
+            }, 1000);
+        }
+
         /**
-             * 点击分类
-             * @param {*} uid 
-             */
+         * 点击分类
+         * @param {*} uid 
+         */
         const sortOnClick = function (uid) {
             console.log(init.sortChecked)
             init.sortChecked = uid
-
         }
-        return { init, sortOnClick }
+
+        /**
+         * 显示头部
+         */
+        const showHeader = function () {
+            if (init.isShowScroll) return
+            let _timeOut = setInterval(function () {
+                init.initScrollNum += 0.1
+                if (init.initScrollNum >= 0) {
+                    init.initScrollNum = 0
+                    init.isShowScroll = true
+                    clearInterval(_timeOut)
+                }
+            }, 1)
+        }
+
+        /**
+         * 隐藏头部
+         */
+        const clearHeader = function () {
+            if (!init.isShowScroll) return
+            let _timeOut = setInterval(function () {
+                init.initScrollNum -= 0.1
+                if (init.initScrollNum <= -12) {
+                    init.isShowScroll = false
+                    clearInterval(_timeOut)
+                }
+            }, 1)
+        }
+
+        /**
+         * 上拉加载
+         */
+        const dataScroll = function () {
+            let tpScrollTop = document.getElementById('data-list-box').scrollTop;
+            // 上拉
+            if (tpScrollTop > init.initScroll) {
+                if (tpScrollTop > 60) {
+                    console.log('上拉-隐藏')
+                    clearHeader()
+                }
+            }
+
+            // 下拉
+            if (tpScrollTop < init.initScroll) {
+                console.log('下拉-显示')
+                showHeader()
+            }
+            init.initScroll = tpScrollTop
+        }
+
+
+        onMounted(function () {
+// showHeader()
+        })
+        return {
+            init, sortOnClick, dataScroll, onLoad
+        }
     }
 }
 </script>
@@ -128,14 +203,16 @@ body {
 }
 
 #home-index-top {
-    height: 48px;
+    height: 6vh;
+    /* height: 48px; */
     border-bottom: 1px inset #313131;
     position: relative;
 }
 
 #sort {
     border-top: 1px inset #757575;
-    height: 48px;
+    /* height: 48px; */
+    height: 6vh;
     text-align: center;
     white-space: nowrap;
     overflow-x: scroll;
@@ -183,7 +260,8 @@ body {
 #home-index-top .logo-title {
     position: absolute;
     left: 50px;
-    line-height: 48px;
+    /* line-height: 48px; */
+    line-height: 6vh;
     color: #FFFFFF;
 
 }
@@ -201,13 +279,17 @@ body {
 }
 
 #data-list-box {
+    height: 88vh;
     width: 100%;
+    overflow-y: auto;
+    padding-top: 12vh;
 }
 
 #data-list-box .item-box {
     width: 100%;
-    height: 310px;
+    /* height: 310px; */
     color: #FFFFFF;
+    margin-bottom: 30px;
 }
 
 #data-list-box .cover-box {
@@ -270,5 +352,13 @@ body {
     position: absolute;
     left: -10px;
     bottom: 20px;
+}
+
+#home-content .header-box {
+    position: fixed;
+    width: 100%;
+    background: #212121f7;
+    height: 12vh;
+    z-index: 99;
 }
 </style>
