@@ -186,7 +186,7 @@ export default {
 
 
         onMounted(function () {
-// showHeader()
+
         })
         return {
             init, sortOnClick, dataScroll, onLoad
