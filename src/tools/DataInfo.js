@@ -66,3 +66,57 @@ export function getData(str, keyStr, ivStr) {
     return decryptedStr;
 
 }
+
+/**
+ * 储存缓存数据
+ * @param {*} key 
+ * @param {*} value 
+ */
+export function setItem(key, value) {
+    if (typeof value === 'object') {
+        value = JSON.stringify(value)
+    }
+    window.localStorage.setItem(key, value)
+}
+
+/**
+ * 获取缓存数据
+ * @param {*} key 
+ * @param {*} value 
+ */
+export function getItem(key) {
+    let value = window.localStorage.getItem(key)
+    try {
+        value = JSON.parse(value)
+    } catch (e) {
+        return value;
+    }
+    return value;
+}
+
+/**
+ * 储存临时换成
+ * @param {*} key 
+ * @param {*} value 
+ */
+export function setSessionItem(key, value) {
+    if (typeof value === 'object') {
+        value = JSON.stringify(value)
+    }
+    window.sessionStorage.setItem(key, value)
+}
+
+/**
+ * 获取临时换成
+ * @param {*} key 
+ * @returns 
+ */
+export function getSessionItem(key) {
+    let value = window.sessionStorage.getItem(key)
+    try {
+        value = JSON.parse(value)
+    } catch (e) {
+        return value;
+    }
+    return value;
+}

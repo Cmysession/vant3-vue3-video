@@ -3,12 +3,14 @@ const routes = [
   {
     path: '/', // 首页
     name: 'home-view',
-    component: () => import(/* webpackChunkName: "HomeView" */ '../views/home/HomeView.vue')
+    component: () => import(/* webpackChunkName: "HomeView" */ '../views/home/HomeView.vue'),
+    mate: { keepAlive: true }
   },
   {
     path: '/video', // 首页
     name: 'video-view',
-    component: () => import(/* webpackChunkName: "VideoView" */ '../views/video/VideoView.vue')
+    component: () => import(/* webpackChunkName: "VideoView" */ '../views/video/VideoView.vue'),
+    mate: { keepAlive: true }
   }
 ]
 

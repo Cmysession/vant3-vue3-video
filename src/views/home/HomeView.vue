@@ -49,8 +49,8 @@
 
 <script>
 import { onMounted, reactive } from 'vue'
-import { useRouter } from "vue-router"
-import { setData, getData } from '@/tools/DataInfo'
+import { onBeforeRouteLeave, useRouter } from "vue-router"
+import { setData, setSessionItem, getSessionItem } from '@/tools/DataInfo'
 export default {
     setup() {
         const router = useRouter()
@@ -194,14 +194,12 @@ export default {
             // 上拉
             if (tpScrollTop > init.initScroll) {
                 if (tpScrollTop > 60) {
-                    console.log('上拉-隐藏')
                     clearHeader()
                 }
             }
 
             // 下拉
             if (tpScrollTop < init.initScroll) {
-                console.log('下拉-显示')
                 showHeader()
             }
             init.initScroll = tpScrollTop
@@ -212,7 +210,6 @@ export default {
          * @param {*} row 
          */
         const rowInfo = function (row) {
-            console.log(getData('123'))
 
             router.push({
                 name: 'video-view',
@@ -222,8 +219,24 @@ export default {
             })
         }
 
-        onMounted(function () {
+        // 在页面离开时记录滚动位置
+        onBeforeRouteLeave(function (to, from, next) {
+            let tpScrollTop = document.getElementById('data-list-box').scrollTop;
+            setSessionItem('tpScrollTop', tpScrollTop)
+        })
+        beforeEnter: (to, from, next) => {
+            // ...
+        }
+        //进入该页面时，用之前保存的滚动位置赋值
+        // onbeforeRouteEnte
+        // beforeRouteEnter(to, from, next) {
+        //     next(vm => {
+        //         document.body.scrollTop = vm.scrollTop
+        //     })
+        // }
 
+        onMounted(function () {
+            console.log(getSessionItem('tpScrollTop'))
         })
         return {
             init, sortOnClick, dataScroll, onLoad, rowInfo
