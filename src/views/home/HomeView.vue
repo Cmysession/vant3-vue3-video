@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <div id="home-content">
             <div :style="{ 'margin-top': init.initScrollNum + 'vh' }" class="header-box">
                 <!-- 头部 -->
@@ -29,7 +28,7 @@
             <!-- 内容页面 -->
             <div id="data-list-box" @scroll="dataScroll">
                 <van-list v-model:loading="init.loading" :finished="init.finished" finished-text="没有更多了" @load="onLoad">
-                    <div class="item-box" v-for="(item, index) in init.dataLists" :key="index">
+                    <div class="item-box" v-for="(item, index) in init.dataLists" :key="index" @click="rowInfo(item)">
                         <div class="cover-box">
                             <img :src="item.cover">
                             <div class="times-box">{{ item.times }}</div>
@@ -45,14 +44,17 @@
                 </van-list>
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
 import { onMounted, reactive } from 'vue'
+import { useRouter } from "vue-router"
+import { setData, getData } from '@/tools/DataInfo'
 export default {
     setup() {
+        const router = useRouter()
+
         const init = reactive({
             sortChecked: '1q',
             logo: require('@/assets/logo.png'),
@@ -130,8 +132,29 @@ export default {
          * @param {*} uid 
          */
         const sortOnClick = function (uid) {
-            console.log(init.sortChecked)
+            // 加载状态结束
+            init.loading = true
+            init.dataLists = []
             init.sortChecked = uid
+            // 异步更新数据
+            // setTimeout 仅做示例，真实场景中一般为 ajax 请求
+            setTimeout(() => {
+                for (let i = 0; i < 10; i++) {
+                    init.dataLists.push({
+                        cover: 'https://i.ytimg.com/vi/nhUNJhM_NAk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAsb3JqJRzblxGurHeuZ7RQGiWq1w',
+                        title: '小米34寸带鱼屏显示器对比体验，不输三星和宏碁，看完就知道该买谁了！',
+                        times: '9:37',
+                        views: '1000',
+                        history: '2021-01-03 12:30',
+                    });
+                }
+                // 加载状态结束
+                init.loading = false
+                // 数据全部加载完成
+                if (init.dataLists.length >= 40) {
+                    init.finished = true
+                }
+            }, 1000);
         }
 
         /**
@@ -184,24 +207,32 @@ export default {
             init.initScroll = tpScrollTop
         }
 
+        /**
+         * 视频详情
+         * @param {*} row 
+         */
+        const rowInfo = function (row) {
+            console.log(getData('123'))
+
+            router.push({
+                name: 'video-view',
+                query: {
+                    row: setData(row)
+                }
+            })
+        }
 
         onMounted(function () {
 
         })
         return {
-            init, sortOnClick, dataScroll, onLoad
+            init, sortOnClick, dataScroll, onLoad, rowInfo
         }
     }
 }
 </script>
 
 <style>
-body {
-    background: #212121;
-    margin: 0;
-    padding: 0;
-}
-
 #home-index-top {
     height: 6vh;
     /* height: 48px; */
