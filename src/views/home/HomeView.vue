@@ -240,7 +240,6 @@ export default {
      * 进来时执行
      */
     activated() {
-
         /**
          * 记住滚动状态
          */
@@ -252,6 +251,8 @@ export default {
         if (btScrollLeft) {
             document.getElementById('sort').scrollLeft = btScrollLeft
         }
+        setSessionItem('tpScrollTop', 0)
+        setSessionItem('btScrollLeft', 0)
 
     },
 

@@ -8,12 +8,7 @@
     </router-view>
   </div>
 </template>
-
-
 <script>
-import { getSessionItem } from '@/tools/DataInfo';
-import { onMounted } from 'vue'
-import { onBeforeRouteUpdate } from 'vue-router';
 export default {
   created() {
     if (this.$route.path === '/') {
@@ -21,19 +16,6 @@ export default {
     }
   },
   setup() {
-    onMounted(function () {
-      console.log(getSessionItem('tpScrollTop'))
-    })
-    onBeforeRouteUpdate((to) => {
-      console.log(to, "=====");
-      if (to.path === "/home") {
-        // console.log(getSessionItem('tpScrollTop'))
-        // console.log(getSessionItem('btScrollLeft'))
-        // console.log(document.getElementById('data-list-box').scrollTop);
-      }
-    });
-
-
     return {}
   }
 }
