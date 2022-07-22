@@ -9,9 +9,13 @@
   </div>
 </template>
 <script>
+import { setSessionItem } from '@/tools/DataInfo';
+
 export default {
   created() {
     if (this.$route.path === '/') {
+      setSessionItem('tpScrollTop', 0)
+      setSessionItem('btScrollLeft', 0)
       this.$router.push('/home');
     }
   },

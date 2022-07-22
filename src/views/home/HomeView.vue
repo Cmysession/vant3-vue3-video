@@ -341,6 +341,15 @@ export default {
     width: 100%;
     overflow-y: auto;
     padding-top: 12vh;
+    scrollbar-width: none;
+    /* Firefox */
+
+    -ms-overflow-style: none;
+    /* IE 10+ */
+}
+#data-list-box::-webkit-scrollbar {
+    display: none;
+    /* Chrome Safari */
 }
 
 #data-list-box .item-box {
