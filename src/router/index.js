@@ -1,17 +1,26 @@
 import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
-    path: '/', // 首页
-    name: 'home-view',
-    component: () => import(/* webpackChunkName: "HomeView" */ '../views/home/HomeView.vue'),
-    mate: { keepAlive: true }
-  },
-  {
-    path: '/video', // 首页
-    name: 'video-view',
-    component: () => import(/* webpackChunkName: "VideoView" */ '../views/video/VideoView.vue'),
-    mate: { keepAlive: true }
+    path: '/',
+    name: '/index-view',
+    component: () => import(/* webpackChunkName: "IndexView" */ '../views/index/indexView.vue'),
+    meta: { keepAlive: true, scrollTop: 0 },
+    children: [
+      {
+        path: '/home', // 首页
+        name: 'home-view',
+        component: () => import(/* webpackChunkName: "HomeView" */ '../views/home/HomeView.vue'),
+        meta: { keepAlive: true, scrollTop: 0 },
+      },
+      {
+        path: '/video', // 首页
+        name: 'video-view',
+        component: () => import(/* webpackChunkName: "VideoView" */ '../views/video/VideoView.vue'),
+        meta: { keepAlive: false, scrollTop: 0 },
+      }
+    ]
   }
+
 ]
 
 const router = createRouter({

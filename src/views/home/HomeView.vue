@@ -132,6 +132,7 @@ export default {
          * @param {*} uid 
          */
         const sortOnClick = function (uid) {
+            console.log(document.getElementById('sort').scrollTop)
             // 加载状态结束
             init.loading = true
             init.dataLists = []
@@ -210,7 +211,6 @@ export default {
          * @param {*} row 
          */
         const rowInfo = function (row) {
-
             router.push({
                 name: 'video-view',
                 query: {
@@ -220,20 +220,12 @@ export default {
         }
 
         // 在页面离开时记录滚动位置
-        onBeforeRouteLeave(function (to, from, next) {
+        onBeforeRouteLeave(function () {
             let tpScrollTop = document.getElementById('data-list-box').scrollTop;
+            let btScrollLeft = document.getElementById('sort').scrollLeft;
             setSessionItem('tpScrollTop', tpScrollTop)
+            setSessionItem('btScrollLeft', btScrollLeft)
         })
-        beforeEnter: (to, from, next) => {
-            // ...
-        }
-        //进入该页面时，用之前保存的滚动位置赋值
-        // onbeforeRouteEnte
-        // beforeRouteEnter(to, from, next) {
-        //     next(vm => {
-        //         document.body.scrollTop = vm.scrollTop
-        //     })
-        // }
 
         onMounted(function () {
             console.log(getSessionItem('tpScrollTop'))
