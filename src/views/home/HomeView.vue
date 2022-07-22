@@ -136,6 +136,7 @@ export default {
         const sortOnClick = function (uid) {
             // 加载状态结束
             init.loading = true
+            init.finished = false
             init.dataLists = []
             init.sortChecked = uid
             // 异步更新数据
