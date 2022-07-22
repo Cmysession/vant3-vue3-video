@@ -52,6 +52,7 @@ import { onMounted, reactive } from 'vue'
 import { onBeforeRouteLeave, useRouter } from "vue-router"
 import { setData, setSessionItem, getSessionItem } from '@/tools/DataInfo'
 export default {
+
     setup() {
         const router = useRouter()
 
@@ -127,12 +128,12 @@ export default {
             }, 1000);
         }
 
+
         /**
          * 点击分类
          * @param {*} uid 
          */
         const sortOnClick = function (uid) {
-            console.log(document.getElementById('sort').scrollTop)
             // 加载状态结束
             init.loading = true
             init.dataLists = []
@@ -198,7 +199,6 @@ export default {
                     clearHeader()
                 }
             }
-
             // 下拉
             if (tpScrollTop < init.initScroll) {
                 showHeader()
@@ -228,12 +228,33 @@ export default {
         })
 
         onMounted(function () {
-            console.log(getSessionItem('tpScrollTop'))
+
         })
+
         return {
             init, sortOnClick, dataScroll, onLoad, rowInfo
         }
-    }
+    },
+
+    /**
+     * 进来时执行
+     */
+    activated() {
+
+        /**
+         * 记住滚动状态
+         */
+        let tpScrollTop = getSessionItem('tpScrollTop')
+        let btScrollLeft = getSessionItem('btScrollLeft')
+        if (tpScrollTop) {
+            document.getElementById('data-list-box').scrollTop = tpScrollTop
+        }
+        if (btScrollLeft) {
+            document.getElementById('sort').scrollLeft = btScrollLeft
+        }
+
+    },
+
 }
 </script>
 

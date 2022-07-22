@@ -27,8 +27,9 @@ export default {
     onBeforeRouteUpdate((to) => {
       console.log(to, "=====");
       if (to.path === "/home") {
-        console.log(getSessionItem('tpScrollTop'))
-        console.log(getSessionItem('btScrollLeft'))
+        // console.log(getSessionItem('tpScrollTop'))
+        // console.log(getSessionItem('btScrollLeft'))
+        // console.log(document.getElementById('data-list-box').scrollTop);
       }
     });
 
