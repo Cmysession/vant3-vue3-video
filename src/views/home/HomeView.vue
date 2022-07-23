@@ -113,6 +113,7 @@ export default {
                     history: '2021-01-03 12:30',
                     is_ad: false,
                     is_dow: false,
+                    link: 'www.baidu.com',
                 }
             ],
             loading: false,
@@ -250,8 +251,8 @@ export default {
 
         // 在页面离开时记录滚动位置
         onBeforeRouteLeave(function () {
-            let tpScrollTop = document.getElementById('data-list-box').scrollTop;
-            let btScrollLeft = document.getElementById('sort').scrollLeft;
+            let tpScrollTop = document.getElementById('data-list-box').scrollTop
+            let btScrollLeft = document.getElementById('sort').scrollLeft
             setSessionItem('tpScrollTop', tpScrollTop)
             setSessionItem('btScrollLeft', btScrollLeft)
         })
@@ -274,6 +275,7 @@ export default {
          */
         let tpScrollTop = getSessionItem('tpScrollTop')
         let btScrollLeft = getSessionItem('btScrollLeft')
+        console.log(btScrollLeft)
         if (tpScrollTop) {
             document.getElementById('data-list-box').scrollTop = tpScrollTop
         }

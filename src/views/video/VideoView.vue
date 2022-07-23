@@ -74,18 +74,18 @@
 </template>
 
 <script>
-import { getData } from '@/tools/DataInfo'
+import { getData, setData } from '@/tools/DataInfo'
 import { onMounted, reactive, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 export default {
     setup() {
-        // const router = useRouter()
+        const router = useRouter()
         const videoRef = ref(null)
         const options = reactive({
             poster: '', //视频类型
             width: "100%",
             height: '250px',
-            src: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", //视频源
+            // src: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", //视频源
             type: "m3u8", //视频类型
             title: '',
             autoPlay: true,
@@ -119,6 +119,45 @@ export default {
                     is_dow: false,
                     link: 'www.baidu.com',
                 },
+                {
+                    cover: 'https://i.ytimg.com/vi/nhUNJhM_NAk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAsb3JqJRzblxGurHeuZ7RQGiWq1w',
+                    title: '小米34寸带鱼屏显示器对比体验，不输三星和宏碁，看完就知道该买谁了！',
+                    times: '9:37',
+                    views: '1000',
+                    history: '2021-01-03 12:30',
+                    is_ad: false,// 是否广告
+                    is_dow: false,
+                    link: 'www.baidu.com',
+                },
+                {
+                    cover: 'https://i.ytimg.com/vi/q2zj74iK1MI/hqdefault.jpg',
+                    title: '合辑 - 房東的貓 - 【春風十里】MV 我說所有的酒都不如你',
+                    times: '0:15',
+                    views: '1000',
+                    history: '2021-01-03 12:30',
+                    is_ad: false,// 是否广告
+                    is_dow: false,
+                    link: 'www.baidu.com',
+                },
+                {
+                    cover: 'https://i.ytimg.com/vi/7ev9uLONeQo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBLeAnXvkPSrr9_6oICQK5Q9i7PhA',
+                    title: '【小品】《你好！打劫》#文松 #杨树林 #田娃 #娇娇 #贾舒涵 — 蠢贼误闯片场遇同行，打劫不成转演戏~【SMG上海东方卫视欢乐频道】',
+                    times: '13:15',
+                    views: '1000',
+                    history: '2021-01-03 12:30',
+                    is_ad: false,
+                    is_dow: false,
+                    link: 'www.baidu.com',
+                },
+                {
+                    cover: 'https://i.ytimg.com/vi/8QgeDkfjrk0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAhXhrh28qsNIzI6ijgCJ2Ayw2vdA',
+                    title: '三国战记：史诗级赵云秒14突破极限！里程碑式的突破！【深邃狼眼睛】',
+                    times: '1:07:35',
+                    views: '1000',
+                    history: '2021-01-03 12:30',
+                    is_ad: false,
+                    is_dow: false,
+                }
             ],
         })
 
@@ -174,12 +213,16 @@ export default {
                 return false
             }
             videoRef.value.pause() // 停止播放
-            // router.push({
-            //     name: 'video-view',
-            //     query: {
-            //         row: setData(row)
-            //     }
-            // })
+            options.src = null
+            router.replace({
+                name: 'back-view',
+                query: {
+                    path:'video-view',
+                    row: setData(row)
+                }
+            })
+            
+
         }
 
         /**

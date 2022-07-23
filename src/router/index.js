@@ -17,9 +17,15 @@ const routes = [
         name: 'video-view',
         component: () => import(/* webpackChunkName: "VideoView" */ '../views/video/VideoView.vue'),
         meta: { keepAlive: false, scrollTop: 0 },
-      }
+      },
     ]
-  }
+  },
+  {
+    path: '/back', // 首页
+    name: 'back-view',
+    component: () => import(/* webpackChunkName: "BackView" */ '../views/back/BackView.vue'),
+    meta: { keepAlive: false, scrollTop: 0 },
+  },
 
 ]
 
