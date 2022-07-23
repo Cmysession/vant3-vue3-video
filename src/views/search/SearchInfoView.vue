@@ -6,24 +6,25 @@
                     <van-icon name="arrow-left" />返回
                 </van-col>
                 <van-col span="16">
-                    <van-field autocomplete="off" v-model="init.searchValue" class="field-box" />
+                    <van-field :disabled="true" class="field-box" v-model="init.searchValue" />
                 </van-col>
-                <van-col span="4">
-                    <van-button type="primary" @click="onToView('search-info-view')" size="small">搜索</van-button>
+                <van-col span="4" @click="delSearchValue">
+                    <van-icon name="cross" />
                 </van-col>
             </van-row>
         </header>
     </div>
 </template>
-<script>
 
+<script>
 import { onMounted, reactive } from 'vue'
-import { useRouter, useRoute } from "vue-router"
-import { Toast } from 'vant'
+import { useRoute, useRouter } from 'vue-router'
+
 export default {
     setup() {
         const route = useRoute()
         const router = useRouter()
+
         const init = reactive({
             searchValue: '',
         })
@@ -32,24 +33,21 @@ export default {
          * 返回事件
          */
         const onClickLeft = function () {
-            if (route.query && route.query.search) {
-                init.searchValue = route.query.search
-                router.go(-2)
-            } else {
-                router.go(-1)
-            }
+            router.replace({
+                name: 'search-view',
+                query: { search: init.searchValue }
+            })
         }
 
+
         /**
-         * 跳转其他页面
-         * @param {*} name 
+         * 清空搜索
+         * @param {*} row 
          */
-        const onToView = function (name) {
-            if (init.searchValue.length <= 0) {
-                Toast('请输入关键字!')
-                return false
-            }
-            router.push({ name: name, query: { search: init.searchValue } })
+        const delSearchValue = function () {
+            router.replace({
+                name: 'search-view',
+            })
         }
 
         onMounted(function () {
@@ -58,7 +56,7 @@ export default {
             }
         })
 
-        return { init, onClickLeft, onToView }
+        return { init, onClickLeft, delSearchValue }
     }
 }
 </script>
@@ -84,13 +82,14 @@ export default {
 }
 
 #search-body-box .header-box .van-col:nth-child(3) {
-    padding-left: 10px;
+    padding-left: 20px;
+    font-size: 22px;
 }
 
 :deep(.field-box) {
     border-radius: 10px;
     height: 35px;
-    background: #3d3d3d;
+    background: #292929;
 }
 
 .van-row {

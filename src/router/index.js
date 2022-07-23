@@ -24,6 +24,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "SearchView" */ '../views/search/SearchView.vue'),
         meta: { keepAlive: false, scrollTop: 0 },
       },
+      {
+        path: '/search-info', // 搜索详情
+        name: 'search-info-view',
+        component: () => import(/* webpackChunkName: "SearchInfoView" */ '../views/search/SearchInfoView.vue'),
+        meta: { keepAlive: false, scrollTop: 0 },
+      },
     ]
   },
   {

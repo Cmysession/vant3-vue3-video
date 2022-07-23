@@ -218,8 +218,6 @@ export default {
                     row: setData(row)
                 }
             })
-
-
         }
 
         /**
@@ -344,7 +342,6 @@ export default {
 
 #list-box .item-box {
     width: 100%;
-    /* height: 310px; */
     color: #FFFFFF;
     margin-bottom: 30px;
 }
