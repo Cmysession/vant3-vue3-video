@@ -31,14 +31,20 @@
                     <div class="item-box" v-for="(item, index) in init.dataLists" :key="index" @click="rowInfo(item)">
                         <div class="cover-box">
                             <img :src="item.cover">
-                            <div class="times-box">{{ item.times }}</div>
+                            <div v-if="!item.is_ad" class="times-box">{{ item.times }}</div>
                         </div>
                         <div class="title-box">
                             {{ item.title }}
                         </div>
-                        <div class="info-box">
+                        <div class="info-box" v-if="!item.is_ad">
                             <div><span class="dian">.</span>{{ item.views }}次观看</div>
                             <div><span class="dian">.</span>{{ item.history }}</div>
+                        </div>
+                        <div class="ad-box" v-if="item.is_ad">
+                            <van-button type="primary" block
+                                color="linear-gradient(to right, rgb(135 135 135), rgb(101 101 101))">
+                                {{ item.is_dow === true ? "点击下载" : "点击访问" }}
+                            </van-button>
                         </div>
                     </div>
                 </van-list>
@@ -75,6 +81,9 @@ export default {
                     times: '9:37',
                     views: '1000',
                     history: '2021-01-03 12:30',
+                    is_ad: true,// 是否广告
+                    is_dow: true,
+                    link: 'www.baidu.com',
                 },
                 {
                     cover: 'https://i.ytimg.com/vi/q2zj74iK1MI/hqdefault.jpg',
@@ -82,6 +91,9 @@ export default {
                     times: '0:15',
                     views: '1000',
                     history: '2021-01-03 12:30',
+                    is_ad: true,// 是否广告
+                    is_dow: false,
+                    link: 'www.baidu.com',
                 },
                 {
                     cover: 'https://i.ytimg.com/vi/7ev9uLONeQo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBLeAnXvkPSrr9_6oICQK5Q9i7PhA',
@@ -89,6 +101,9 @@ export default {
                     times: '13:15',
                     views: '1000',
                     history: '2021-01-03 12:30',
+                    is_ad: false,
+                    is_dow: false,
+                    link: 'www.baidu.com',
                 },
                 {
                     cover: 'https://i.ytimg.com/vi/8QgeDkfjrk0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAhXhrh28qsNIzI6ijgCJ2Ayw2vdA',
@@ -96,8 +111,9 @@ export default {
                     times: '1:07:35',
                     views: '1000',
                     history: '2021-01-03 12:30',
-                },
-
+                    is_ad: false,
+                    is_dow: false,
+                }
             ],
             loading: false,
             finished: false,
@@ -212,12 +228,24 @@ export default {
          * @param {*} row 
          */
         const rowInfo = function (row) {
+            if (row.is_ad) {
+                toLink(row.link)
+                return false
+            }
             router.push({
                 name: 'video-view',
                 query: {
                     row: setData(row)
                 }
             })
+        }
+
+        /**
+         * 点击广告
+         * @param {*} item 
+         */
+        const toLink = function (link) {
+            window.open('//' + link, link)
         }
 
         // 在页面离开时记录滚动位置
@@ -348,6 +376,7 @@ export default {
     -ms-overflow-style: none;
     /* IE 10+ */
 }
+
 #data-list-box::-webkit-scrollbar {
     display: none;
     /* Chrome Safari */
@@ -362,13 +391,13 @@ export default {
 
 #data-list-box .cover-box {
     position: relative;
-    height: 235px;
+    height: 210px;
     width: 100%;
 }
 
 #data-list-box .cover-box img {
     width: 100%;
-    height: 235px;
+    height: 210px;
 }
 
 #data-list-box .cover-box .times-box {
@@ -411,6 +440,17 @@ export default {
     position: absolute;
     right: 40px;
 }
+
+#data-list-box .ad-box {
+    position: relative;
+    bottom: -10px;
+
+}
+
+#data-list-box .ad-box .van-button {
+    letter-spacing: 10px;
+}
+
 
 #data-list-box .dian {
     width: 10px;

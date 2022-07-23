@@ -11,7 +11,8 @@
             </div>
 
             <div id="videoInfo">
-                <vue3VideoPlay v-bind="options" :src="options.src" :type="options.type" :poster='options.poster' />
+                <vue3VideoPlay ref="videoRef" v-bind="options" :src="options.src" :type="options.type"
+                    :poster='options.poster' />
             </div>
         </div>
 
@@ -45,14 +46,24 @@
                             @click="rowInfo(item)">
                             <div class="cover-box">
                                 <img :src="item.cover">
-                                <div class="times-box">{{ item.times }}</div>
+                                <div v-if="!item.is_ad" class="times-box">{{ item.times }}</div>
                             </div>
                             <div class="title-box">
                                 {{ item.title }}
                             </div>
-                            <div class="info-box">
+                            <!-- <div class="info-box">
                                 <div><span class="dian">.</span>{{ item.views }}次观看</div>
                                 <div><span class="dian">.</span>{{ item.history }}</div>
+                            </div> -->
+                            <div class="info-box" v-if="!item.is_ad">
+                                <div><span class="dian">.</span>{{ item.views }}次观看</div>
+                                <div><span class="dian">.</span>{{ item.history }}</div>
+                            </div>
+                            <div class="ad-box" v-if="item.is_ad">
+                                <van-button type="primary" block
+                                    color="linear-gradient(to right, rgb(135 135 135), rgb(101 101 101))">
+                                    {{ item.is_dow === true ? "点击下载" : "点击访问" }}
+                                </van-button>
                             </div>
                         </div>
                     </van-list>
@@ -64,11 +75,12 @@
 
 <script>
 import { getData } from '@/tools/DataInfo'
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 export default {
     setup() {
         // const router = useRouter()
+        const videoRef = ref(null)
         const options = reactive({
             poster: '', //视频类型
             width: "100%",
@@ -85,7 +97,29 @@ export default {
 
         const init = reactive({
             rowData: {},
-            dataLists: [],
+
+            dataLists: [
+                {
+                    cover: 'https://i.ytimg.com/vi/nhUNJhM_NAk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAsb3JqJRzblxGurHeuZ7RQGiWq1w',
+                    title: '小米34寸带鱼屏显示器对比体验，不输三星和宏碁，看完就知道该买谁了！',
+                    times: '9:37',
+                    views: '1000',
+                    history: '2021-01-03 12:30',
+                    is_ad: true,// 是否广告
+                    is_dow: true,
+                    link: 'www.baidu.com',
+                },
+                {
+                    cover: 'https://i.ytimg.com/vi/q2zj74iK1MI/hqdefault.jpg',
+                    title: '合辑 - 房東的貓 - 【春風十里】MV 我說所有的酒都不如你',
+                    times: '0:15',
+                    views: '1000',
+                    history: '2021-01-03 12:30',
+                    is_ad: true,// 是否广告
+                    is_dow: false,
+                    link: 'www.baidu.com',
+                },
+            ],
         })
 
         const onLoad = () => {
@@ -116,6 +150,7 @@ export default {
          */
         const onClickLeft = function () {
             // 清除播放数据
+            videoRef.value.pause()
             options.src = null
             history.back()
         }
@@ -134,7 +169,11 @@ export default {
          * @param {*} row 
          */
         const rowInfo = function (row) {
-            console.log(row)
+            if (row.is_ad) {
+                toLink(row.link)
+                return false
+            }
+            videoRef.value.pause() // 停止播放
             // router.push({
             //     name: 'video-view',
             //     query: {
@@ -142,13 +181,24 @@ export default {
             //     }
             // })
         }
+
+        /**
+         * 点击广告
+         * @param {*} item 
+         */
+        const toLink = function (link) {
+            videoRef.value.pause() // 停止播放
+            window.open('//' + link, link)
+        }
         onMounted(function () {
             init.rowData = getData(route.query.row)
             console.log(init.rowData)
             options.title = init.rowData.title
             options.options = init.rowData.cover
         })
-        return { init, onClickLeft, options, onClickTags, onLoad, rowInfo }
+        return {
+            init, onClickLeft, options, onClickTags, onLoad, rowInfo, videoRef
+        }
     }
 }
 </script>
@@ -320,5 +370,15 @@ export default {
     font-size: 25px;
     font-weight: bold;
 
+}
+
+#list-box .ad-box {
+    position: relative;
+    bottom: -10px;
+
+}
+
+#list-box .ad-box .van-button {
+    letter-spacing: 10px;
 }
 </style>
