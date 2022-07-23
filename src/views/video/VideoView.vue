@@ -235,7 +235,6 @@ export default {
         }
         onMounted(function () {
             init.rowData = getData(route.query.row)
-            console.log(init.rowData)
             options.title = init.rowData.title
             options.options = init.rowData.cover
         })

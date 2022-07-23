@@ -275,7 +275,6 @@ export default {
          */
         let tpScrollTop = getSessionItem('tpScrollTop')
         let btScrollLeft = getSessionItem('btScrollLeft')
-        console.log(btScrollLeft)
         if (tpScrollTop) {
             document.getElementById('data-list-box').scrollTop = tpScrollTop
         }
@@ -284,7 +283,6 @@ export default {
         }
         setSessionItem('tpScrollTop', 0)
         setSessionItem('btScrollLeft', 0)
-
     },
 
 }
