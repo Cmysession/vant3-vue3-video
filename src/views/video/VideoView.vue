@@ -4,9 +4,6 @@
             <div id="back-box">
                 <van-nav-bar left-arrow left-text="返回" @click-left="onClickLeft" class="header-box"
                     :title="init.rowData.title">
-                    <template #right>
-                        <van-icon name="search" size="25" />
-                    </template>
                 </van-nav-bar>
             </div>
 
@@ -85,7 +82,7 @@ export default {
             poster: '', //视频类型
             width: "100%",
             height: '250px',
-            // src: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", //视频源
+            src: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", //视频源
             type: "m3u8", //视频类型
             title: '',
             autoPlay: true,
@@ -217,11 +214,11 @@ export default {
             router.replace({
                 name: 'back-view',
                 query: {
-                    path:'video-view',
+                    path: 'video-view',
                     row: setData(row)
                 }
             })
-            
+
 
         }
 
@@ -233,6 +230,8 @@ export default {
             videoRef.value.pause() // 停止播放
             window.open('//' + link, link)
         }
+
+
         onMounted(function () {
             init.rowData = getData(route.query.row)
             options.title = init.rowData.title
@@ -422,5 +421,10 @@ export default {
 
 #list-box .ad-box .van-button {
     letter-spacing: 10px;
+}
+
+:deep(.van-nav-bar__title) {
+    max-width: 68%;
+    margin-left: 25%;
 }
 </style>

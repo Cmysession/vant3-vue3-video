@@ -18,6 +18,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "VideoView" */ '../views/video/VideoView.vue'),
         meta: { keepAlive: false, scrollTop: 0 },
       },
+      {
+        path: '/search', // 搜索
+        name: 'search-view',
+        component: () => import(/* webpackChunkName: "SearchView" */ '../views/search/SearchView.vue'),
+        meta: { keepAlive: false, scrollTop: 0 },
+      },
     ]
   },
   {

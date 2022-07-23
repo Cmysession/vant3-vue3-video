@@ -10,7 +10,7 @@
                         <div class="logo-title">YouTuBe</div>
                     </div>
                     <!-- 搜索 -->
-                    <div class="search-box">
+                    <div class="search-box" @click="onToView('search-view')">
                         <van-icon name="search" color="#FFFFFF" size="28" />
                     </div>
                     <!-- 我的信息 -->
@@ -257,12 +257,20 @@ export default {
             setSessionItem('btScrollLeft', btScrollLeft)
         })
 
+        /**
+         * 跳转其他页面
+         * @param {*} name 
+         */
+        const onToView = function (name) {
+            router.push({ name: name })
+        }
+        
         onMounted(function () {
 
         })
 
         return {
-            init, sortOnClick, dataScroll, onLoad, rowInfo
+            init, sortOnClick, dataScroll, onLoad, rowInfo, onToView
         }
     },
 
