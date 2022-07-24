@@ -28,7 +28,17 @@ const routes = [
         path: '/search-info', // 搜索详情
         name: 'search-info-view',
         component: () => import(/* webpackChunkName: "SearchInfoView" */ '../views/search/SearchInfoView.vue'),
-        meta: { keepAlive: true, scrollTop: 0 },
+        meta: { keepAlive: false, scrollTop: 0 },
+        // 路由独享守卫
+        beforeEnter: (to, from) => {
+          // 搜索时当前页面要刷新
+          if (from.path === "/search") {
+            to.meta.keepAlive = false
+          } else {
+            to.meta.keepAlive = true
+          }
+
+        },
       },
     ]
   },
