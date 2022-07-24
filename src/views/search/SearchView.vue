@@ -32,12 +32,7 @@ export default {
          * 返回事件
          */
         const onClickLeft = function () {
-            if (route.query && route.query.search) {
-                init.searchValue = route.query.search
-                router.go(-2)
-            } else {
-                router.go(-1)
-            }
+            router.go(-1)
         }
 
         /**
@@ -49,7 +44,7 @@ export default {
                 Toast('请输入关键字!')
                 return false
             }
-            router.push({ name: name, query: { search: init.searchValue } })
+            router.replace({ name: name, query: { search: init.searchValue } })
         }
 
         onMounted(function () {

@@ -4,6 +4,9 @@
             <div id="back-box">
                 <van-nav-bar left-arrow left-text="返回" @click-left="onClickLeft" class="header-box"
                     :title="init.rowData.title">
+                    <template #right>
+                        <van-icon name="search" size="25" @click="onToView('search-view')" />
+                    </template>
                 </van-nav-bar>
             </div>
 
@@ -79,7 +82,7 @@ export default {
         const router = useRouter()
         const videoRef = ref(null)
         const options = reactive({
-            poster: '', //视频类型
+            poster: '', //视频图片
             width: "100%",
             height: '250px',
             src: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", //视频源
@@ -196,7 +199,11 @@ export default {
          * @param {*} value 
          */
         const onClickTags = function (value) {
-            console.log(value)
+            videoRef.value.pause()
+            router.push({
+                name: 'search-view',
+                query: { search: "#" + value }
+            })
         }
 
 
@@ -221,6 +228,14 @@ export default {
         }
 
         /**
+         * 跳转其他页面
+         * @param {*} name 
+         */
+        const onToView = function (name) {
+            router.push({ name: name })
+        }
+
+        /**
          * 点击广告
          * @param {*} item 
          */
@@ -236,7 +251,7 @@ export default {
             options.options = init.rowData.cover
         })
         return {
-            init, onClickLeft, options, onClickTags, onLoad, rowInfo, videoRef
+            init, onClickLeft, options, onClickTags, onLoad, rowInfo, videoRef,onToView
         }
     }
 }
@@ -421,7 +436,7 @@ export default {
 }
 
 :deep(.van-nav-bar__title) {
-    max-width: 68%;
-    margin-left: 25%;
+    max-width: 65%;
+    /* margin-left: 25%; */
 }
 </style>

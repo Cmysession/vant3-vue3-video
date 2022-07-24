@@ -13,10 +13,10 @@ const routes = [
         meta: { keepAlive: true, scrollTop: 0 },
       },
       {
-        path: '/video', // 首页
+        path: '/video', // 视频页面
         name: 'video-view',
         component: () => import(/* webpackChunkName: "VideoView" */ '../views/video/VideoView.vue'),
-        meta: { keepAlive: false, scrollTop: 0 },
+        meta: { keepAlive: true, scrollTop: 0 },
       },
       {
         path: '/search', // 搜索
