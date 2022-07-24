@@ -16,7 +16,7 @@ const routes = [
         path: '/video', // 视频页面
         name: 'video-view',
         component: () => import(/* webpackChunkName: "VideoView" */ '../views/video/VideoView.vue'),
-        meta: { keepAlive: true, scrollTop: 0 },
+        meta: { keepAlive: false, scrollTop: 0 },
       },
       {
         path: '/search', // 搜索
@@ -28,7 +28,7 @@ const routes = [
         path: '/search-info', // 搜索详情
         name: 'search-info-view',
         component: () => import(/* webpackChunkName: "SearchInfoView" */ '../views/search/SearchInfoView.vue'),
-        meta: { keepAlive: false, scrollTop: 0 },
+        meta: { keepAlive: true, scrollTop: 0 },
       },
     ]
   },

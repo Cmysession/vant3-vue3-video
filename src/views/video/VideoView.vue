@@ -4,9 +4,6 @@
             <div id="back-box">
                 <van-nav-bar left-arrow left-text="返回" @click-left="onClickLeft" class="header-box"
                     :title="init.rowData.title">
-                    <template #right>
-                        <van-icon name="search" size="25" @click="onToView('search-view')" />
-                    </template>
                 </van-nav-bar>
             </div>
 
@@ -30,9 +27,9 @@
                 </van-row>
             </div>
             <div class="tags-box">
-                <van-tag @click="onClickTags('1')" color="#ffe1e1" text-color="#ad0000">标签</van-tag>
-                <van-tag @click="onClickTags('2')" color="#ffe1e1" text-color="#ad0000">标签</van-tag>
-                <van-tag @click="onClickTags('3')" color="#ffe1e1" text-color="#ad0000">标签</van-tag>
+                <van-tag color="#ffe1e1" text-color="#ad0000">标签</van-tag>
+                <van-tag color="#ffe1e1" text-color="#ad0000">标签</van-tag>
+                <van-tag color="#ffe1e1" text-color="#ad0000">标签</van-tag>
             </div>
 
             <div id="recommend-box">
@@ -436,7 +433,7 @@ export default {
 }
 
 :deep(.van-nav-bar__title) {
-    max-width: 65%;
-    /* margin-left: 25%; */
+    max-width: 70%;
+    margin-left: 23%;
 }
 </style>
