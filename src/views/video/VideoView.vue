@@ -27,9 +27,11 @@
                 </van-row>
             </div>
             <div class="tags-box">
-                <van-tag color="#ffe1e1" text-color="#ad0000">标签</van-tag>
-                <van-tag color="#ffe1e1" text-color="#ad0000">标签</van-tag>
-                <van-tag color="#ffe1e1" text-color="#ad0000">标签</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">标签</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">标签</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">标签</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">标签</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">标签</van-tag>
             </div>
 
             <div id="recommend-box">
@@ -248,7 +250,7 @@ export default {
             options.options = init.rowData.cover
         })
         return {
-            init, onClickLeft, options, onClickTags, onLoad, rowInfo, videoRef,onToView
+            init, onClickLeft, options, onClickTags, onLoad, rowInfo, videoRef, onToView
         }
     }
 }

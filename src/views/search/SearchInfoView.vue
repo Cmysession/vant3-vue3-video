@@ -152,7 +152,8 @@ export default {
         /**
          * 记住滚动状态
          */
-        let searchScrollTop = getSessionItem('SearchScrollTop')
+        let searchScrollTop = getSessionItem('searchScrollTop')
+        console.log(searchScrollTop)
         if (searchScrollTop) {
             document.getElementById('search-list-box').scrollTop = searchScrollTop
         }
