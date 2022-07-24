@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html lang="">
   <head>
+    <script>
+    var ua = navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger\/[0-9]/i)){
+        alert('微信')
+      }
+      if(ua.match(/QQ\/[0-9]/i)){
+        alert('QQ')
+      }
+      var os = function() {
+      var ua = navigator.userAgent,
+          isWindowsPhone = /(?:Windows Phone)/.test(ua),
+          isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
+          isAndroid = /(?:Android)/.test(ua),
+          isFireFox = /(?:Firefox)/.test(ua),
+          isChrome = /(?:Chrome|CriOS)/.test(ua),
+          isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
+          isPhone = /(?:iPhone)/.test(ua) && !isTablet,
+          isPc = !isPhone && !isAndroid && !isSymbian;
+      return {
+          isTablet: isTablet,
+          isPhone: isPhone,
+          isAndroid: isAndroid,
+          isPc: isPc
+      };
+    }();
+    
+    if(os.isAndroid || os.isPhone) {
+        console.log('手机给访问')
+    } else if(os.isTablet) {
+        alert("平板")
+    } else if(os.isPc) {
+        alert("电脑")
+    }
+
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>～ 。～</title>
   </head>
   <body>
     <noscript>
