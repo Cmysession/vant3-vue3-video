@@ -89,7 +89,6 @@ export default {
          * @param {*} item 
          */
         const onClickKeys = function (item) {
-            console.log(item.name)
             init.searchValue = item.name
             onToView('search-info-view')
         }
@@ -99,7 +98,6 @@ export default {
          * @param {*} item 
          */
         const onClickTages = function (item) {
-
             init.searchValue += "#"+item.name
         }
 

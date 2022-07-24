@@ -28,16 +28,16 @@ const routes = [
         path: '/search-info', // 搜索详情
         name: 'search-info-view',
         component: () => import(/* webpackChunkName: "SearchInfoView" */ '../views/search/SearchInfoView.vue'),
-        meta: { keepAlive: false, scrollTop: 0 },
+        meta: { keepAlive: true, scrollTop: 0 },
         // 路由独享守卫
         beforeEnter: (to, from) => {
+          console.log(from.path)
           // 搜索时当前页面要刷新
           if (from.path === "/search") {
             to.meta.keepAlive = false
           } else {
             to.meta.keepAlive = true
           }
-
         },
       },
     ]
@@ -46,7 +46,7 @@ const routes = [
     path: '/back', // 首页
     name: 'back-view',
     component: () => import(/* webpackChunkName: "BackView" */ '../views/back/BackView.vue'),
-    meta: { keepAlive: false, scrollTop: 0 },
+    meta: { keepAlive: true, scrollTop: 0 },
   },
 
 ]

@@ -76,6 +76,8 @@
 import { getData, setData } from '@/tools/DataInfo'
 import { onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { onBeforeRouteUpdate } from "vue-router"
+
 export default {
     setup() {
         const router = useRouter()
@@ -96,7 +98,6 @@ export default {
 
         const init = reactive({
             rowData: {},
-
             dataLists: [
                 {
                     cover: 'https://i.ytimg.com/vi/nhUNJhM_NAk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAsb3JqJRzblxGurHeuZ7RQGiWq1w',
@@ -160,6 +161,17 @@ export default {
             ],
         })
 
+
+        onBeforeRouteUpdate((to) => {
+            console.log(to, "=====");
+            // 当更URL换时
+            init.rowData = getData(to.query.row)
+            init.dataLists = []
+            options.title = init.rowData.title
+            options.options = init.rowData.cover
+            options.src = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
+        });
+
         const onLoad = () => {
             // 异步更新数据
             // setTimeout 仅做示例，真实场景中一般为 ajax 请求
@@ -218,9 +230,10 @@ export default {
             videoRef.value.pause() // 停止播放
             options.src = null
             router.replace({
-                name: 'back-view',
+                // name: 'back-view',
+                name: 'video-view',
                 query: {
-                    path: 'video-view',
+                    // path: 'video-view',
                     row: setData(row)
                 }
             })
@@ -243,11 +256,16 @@ export default {
             window.open('//' + link, link)
         }
 
-
-        onMounted(function () {
+        const getInfo = function () {
             init.rowData = getData(route.query.row)
             options.title = init.rowData.title
             options.options = init.rowData.cover
+            options.src = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
+        }
+
+
+        onMounted(function () {
+            getInfo()
         })
         return {
             init, onClickLeft, options, onClickTags, onLoad, rowInfo, videoRef, onToView
