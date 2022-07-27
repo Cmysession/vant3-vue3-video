@@ -31,7 +31,6 @@ const routes = [
         meta: { keepAlive: true, scrollTop: 0 },
         // 路由独享守卫
         beforeEnter: (to, from) => {
-          console.log(from.path)
           // 搜索时当前页面要刷新
           if (from.path === "/search") {
             to.meta.keepAlive = false
@@ -40,6 +39,19 @@ const routes = [
           }
         },
       },
+      {
+        path: '/users', // 用户详情
+        name: 'users-view',
+        component: () => import(/* webpackChunkName: "UsersView" */ '../views/users/UsersView.vue'),
+        meta: { keepAlive: false, scrollTop: 0 },
+      },
+      {
+        path: '/bind-user', // 绑定用户
+        name: 'bind-user-view',
+        component: () => import(/* webpackChunkName: "BindUserView" */ '../views/users/BindUserView.vue'),
+        meta: { keepAlive: false, scrollTop: 0 },
+      },
+
     ]
   },
   {

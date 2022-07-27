@@ -163,8 +163,7 @@ export default {
 
 
         onBeforeRouteUpdate((to) => {
-            console.log(to, "=====");
-            // 当更URL换时
+            // 当更URL换时重新获取数据
             init.rowData = getData(to.query.row)
             init.dataLists = []
             options.title = init.rowData.title

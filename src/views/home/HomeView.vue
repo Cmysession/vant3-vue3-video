@@ -14,7 +14,7 @@
                         <van-icon name="search" color="#FFFFFF" size="28" />
                     </div>
                     <!-- 我的信息 -->
-                    <div class="user-box">
+                    <div class="user-box" @click="onToView('users-view')">
                         <van-icon name="user-circle-o" color="#FFFFFF" size="28" />
                     </div>
                 </header>
