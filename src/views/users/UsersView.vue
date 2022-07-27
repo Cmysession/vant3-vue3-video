@@ -15,9 +15,9 @@
                     <van-cell-group inset>
                         <van-cell>
                             <van-grid :column-num="3" :border="false">
-                                <van-grid-item icon="medal-o" text="等级:V1" />
+                                <van-grid-item icon="medal-o" text="等级:游客" />
                                 <van-grid-item icon="gold-coin-o" text="余额:100" />
-                                <van-grid-item icon="cash-back-record" text="充值" />
+                                <van-grid-item to="/combo" icon="cash-back-record" text="购买套餐" />
                             </van-grid>
                         </van-cell>
                         <van-cell>

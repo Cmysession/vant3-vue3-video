@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import {
-    Button, Icon, List, NavBar, Tag, Col, Row, Field, CellGroup,Cell,Form
+    Button, Icon, List, NavBar, Tag, Col, Row, Field, CellGroup, Cell, Form, Card, SubmitBar
 } from 'vant'
 import publicCss from './style/public.css'
 import vue3videoPlay from "vue3-video-play" // 引入组件
@@ -24,5 +24,7 @@ createApp(App)
     .use(CellGroup)
     .use(Form)
     .use(vue3videoPlay)
+    .use(Card)
+    .use(SubmitBar)
     .use(router)
     .mount('#app')

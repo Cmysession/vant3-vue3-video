@@ -52,9 +52,15 @@ const routes = [
         meta: { keepAlive: false, scrollTop: 0 },
       },
       {
-        path: '/edit-user', // 绑定用户
+        path: '/edit-user', // 修改用户
         name: 'edit-user-view',
         component: () => import(/* webpackChunkName: "BindUserView" */ '../views/users/EditUserView.vue'),
+        meta: { keepAlive: false, scrollTop: 0 },
+      },
+      {
+        path: '/combo', // 套餐
+        name: 'combo-view',
+        component: () => import(/* webpackChunkName: "ComboView" */ '../views/users/ComboView.vue'),
         meta: { keepAlive: false, scrollTop: 0 },
       },
     ]
