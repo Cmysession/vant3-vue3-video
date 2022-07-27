@@ -51,7 +51,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "BindUserView" */ '../views/users/BindUserView.vue'),
         meta: { keepAlive: false, scrollTop: 0 },
       },
-
+      {
+        path: '/edit-user', // 绑定用户
+        name: 'edit-user-view',
+        component: () => import(/* webpackChunkName: "BindUserView" */ '../views/users/EditUserView.vue'),
+        meta: { keepAlive: false, scrollTop: 0 },
+      },
     ]
   },
   {

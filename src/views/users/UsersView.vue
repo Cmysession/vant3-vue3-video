@@ -32,15 +32,19 @@
                 <div class="oth-box">
 
                     <van-cell-group inset>
-                        <van-cell icon="setting-o" title="绑定账号" is-link to="/bind-user" />
+                        <van-cell icon="certificate" title="绑定账号" is-link to="/bind-user" />
                     </van-cell-group>
-                    
+
                     <van-cell-group inset>
                         <van-cell icon="balance-list-o" title="消费记录" is-link to="/" />
                     </van-cell-group>
 
                     <van-cell-group inset>
                         <van-cell icon="service-o" title="联系客服" is-link to="/" />
+                    </van-cell-group>
+
+                    <van-cell-group inset>
+                        <van-cell icon="edit" title="修改密码" is-link to="/edit-user" />
                     </van-cell-group>
 
                 </div>

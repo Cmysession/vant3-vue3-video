@@ -7,14 +7,16 @@
         <div id="body-box">
             <van-form @submit="onSubmit">
                 <van-cell-group inset>
-                    <van-field v-model="init.username" name="登陆账号" label="登陆账号" placeholder="绑定账号后无法更改"
-                        :rules="[{ required: true, message: '请填写登陆账号' }]" />
-                    <van-field v-model="init.password" type="password" name="登陆密码" label="登陆密码" placeholder="登陆密码"
-                        :rules="[{ required: true, message: '请填写登陆密码' }]" />
+                    <van-field v-model="init.password" type="password" name="旧密码" label="旧密码" placeholder="旧密码"
+                        :rules="[{ required: true, message: '请填旧密码' }]" />
+                    <van-field v-model="init.password" type="password" name="新密码" label="新密码" placeholder="新密码"
+                        :rules="[{ required: true, message: '请填写新密码' }]" />
+                    <van-field v-model="init.password" type="password" name="确认密码" label="确认密码" placeholder="确认密码"
+                        :rules="[{ required: true, message: '请确认密码' }]" />
                 </van-cell-group>
                 <div style="margin: 16px;">
                     <van-button round block type="primary" native-type="submit">
-                        {{init.title}}
+                        {{ init.title }}
                     </van-button>
                 </div>
             </van-form>
@@ -30,7 +32,7 @@ export default {
         const onClickLeft = () => history.back()
 
         const init = reactive({
-            title: "绑定账号",
+            title: "修改密码",
             username: "",
             password: "",
         })
