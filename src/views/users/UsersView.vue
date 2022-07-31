@@ -6,13 +6,11 @@
         </div>
         <div id="body-box">
             <div id="content-box">
-                <van-cell-group inset>
-                    <van-cell :title="init.username" label="邀请码：CODEOUIO">
-                    </van-cell>
-                </van-cell-group>
 
                 <div class="my-money-info">
                     <van-cell-group inset>
+                        <van-cell :title="init.username" label="邀请码：CODEOUIO">
+                        </van-cell>
                         <van-cell>
                             <van-grid :column-num="3" :border="false">
                                 <van-grid-item icon="medal-o" text="等级:游客" />
@@ -20,16 +18,13 @@
                                 <van-grid-item to="/combo" icon="cash-back-record" text="购买套餐" />
                             </van-grid>
                         </van-cell>
-                        <van-cell>
-                            <van-grid class="tx" direction="horizontal" :column-num="2" :border="false">
-                                <van-grid-item icon="star-o" text="我的收藏" />
-                                <van-grid-item icon="browsing-history-o" text="观影历史" />
-                            </van-grid>
-                        </van-cell>
                     </van-cell-group>
                 </div>
 
                 <div class="oth-box">
+                    <van-cell-group inset>
+                        <van-cell icon="coupon-o" title="福利兑换" is-link />
+                    </van-cell-group>
 
                     <van-cell-group inset>
                         <van-cell icon="certificate" title="绑定账号" is-link to="/bind-user" />
