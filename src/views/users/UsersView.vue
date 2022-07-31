@@ -13,9 +13,10 @@
                         </van-cell>
                         <van-cell>
                             <van-grid :column-num="3" :border="false">
-                                <van-grid-item to="/vip-info" icon="medal-o" text="等级:游客" />
-                                <van-grid-item to="/vip-info" icon="balance-list-o" text="金币:9999" />
+                                <van-grid-item icon="medal-o" text="等级:游客" />
                                 <van-grid-item to="/combo" icon="cash-back-record" text="购买套餐" />
+                                <van-grid-item icon="balance-list-o" text="消费记录" />
+                                
                             </van-grid>
                         </van-cell>
                     </van-cell-group>
@@ -189,7 +190,7 @@ export default {
 }
 
 :deep(.my-money-info .van-grid-item__icon) {
-    color: rgb(174 164 255);
+    color: rgb(152 166 247);
 }
 
 :deep(.van-cell__right-icon) {

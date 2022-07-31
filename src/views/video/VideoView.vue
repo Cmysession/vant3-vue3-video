@@ -2,20 +2,22 @@
     <div id="content-box">
         <div id="top-box">
             <div id="back-box">
-                <van-nav-bar left-arrow left-text="返回" @click-left="onClickLeft" class="header-box"
-                    :title="init.rowData.title">
+                <van-nav-bar left-arrow left-text="返回" @click-left="onClickLeft" class="header-box" right-text="刷新"
+                    @click-right="onClickRight" :title="init.rowData.title">
                 </van-nav-bar>
             </div>
 
             <div id="videoInfo">
-                <vue3VideoPlay ref="videoRef" v-bind="options" :src="options.src" :type="options.type"
+                <vue3VideoPlay  ref="videoRef" v-bind="options" :src="options.src" :type="options.type"
                     :poster='options.poster' />
             </div>
         </div>
 
         <div id="body-box">
             <div class="title-box">
-                {{ init.rowData.title }}
+                <van-icon class="vip-box" v-if="!init.rowData.is_ad && init.rowData.vip" name="medal" />{{
+                        init.rowData.title
+                }}
             </div>
             <div class="info-box">
                 <van-row>
@@ -45,6 +47,9 @@
                             @click="rowInfo(item)">
                             <div class="cover-box">
                                 <img :src="item.cover">
+                                <div v-if="!item.is_ad && item.vip" class="vip-box">
+                                    <van-icon class="icons-box" name="medal" />
+                                </div>
                                 <div v-if="!item.is_ad" class="times-box">{{ item.times }}</div>
                             </div>
                             <div class="title-box">
@@ -74,11 +79,16 @@
 
 <script>
 import { getData, setData } from '@/tools/DataInfo'
+import 'vant/es/dialog/style'
+import { Dialog } from 'vant'
 import { onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { onBeforeRouteUpdate } from "vue-router"
 
 export default {
+    components: {
+        [Dialog.Component.name]: Dialog.Component,
+    },
     setup() {
         const router = useRouter()
         const videoRef = ref(null)
@@ -86,7 +96,7 @@ export default {
             poster: '', //视频图片
             width: "100%",
             height: '250px',
-            src: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", //视频源
+            // src: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", //视频源
             type: "m3u8", //视频类型
             title: '',
             autoPlay: true,
@@ -107,6 +117,7 @@ export default {
                     history: '2021-01-03 12:30',
                     is_ad: true,// 是否广告
                     is_dow: true,
+                    vip: true,
                     link: 'www.baidu.com',
                 },
                 {
@@ -115,6 +126,7 @@ export default {
                     times: '0:15',
                     views: '1000',
                     history: '2021-01-03 12:30',
+                    vip: true,
                     is_ad: true,// 是否广告
                     is_dow: false,
                     link: 'www.baidu.com',
@@ -125,6 +137,7 @@ export default {
                     times: '9:37',
                     views: '1000',
                     history: '2021-01-03 12:30',
+                    vip: true,
                     is_ad: false,// 是否广告
                     is_dow: false,
                     link: 'www.baidu.com',
@@ -135,6 +148,7 @@ export default {
                     times: '0:15',
                     views: '1000',
                     history: '2021-01-03 12:30',
+                    vip: true,
                     is_ad: false,// 是否广告
                     is_dow: false,
                     link: 'www.baidu.com',
@@ -168,6 +182,15 @@ export default {
             init.dataLists = []
             options.title = init.rowData.title
             options.options = init.rowData.cover
+            if (init.rowData.vip) {
+                Dialog.alert({
+                    message: '此视频需要开通会员！',
+                }).then(() => {
+                    router.push('/combo')
+                    return false
+                })
+                return
+            }
             options.src = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
         });
 
@@ -239,6 +262,13 @@ export default {
         }
 
         /**
+         * 刷新
+         */
+        const onClickRight = function () {
+            window.location.reload()
+        }
+
+        /**
          * 跳转其他页面
          * @param {*} name 
          */
@@ -256,7 +286,19 @@ export default {
         }
 
         const getInfo = function () {
+
             init.rowData = getData(route.query.row)
+
+            if (init.rowData.vip) {
+                Dialog.alert({
+                    message: '此视频需要开通会员！',
+                }).then(() => {
+                    router.push('/combo')
+                    return false
+                })
+                return
+            }
+
             options.title = init.rowData.title
             options.options = init.rowData.cover
             options.src = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
@@ -267,7 +309,7 @@ export default {
             getInfo()
         })
         return {
-            init, onClickLeft, options, onClickTags, onLoad, rowInfo, videoRef, onToView
+            init, onClickLeft, options, onClickTags, onLoad, rowInfo, videoRef, onToView, onClickRight
         }
     }
 }
@@ -399,6 +441,16 @@ export default {
     border-radius: 5px;
 }
 
+#list-box .cover-box .vip-box {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 30px;
+    color: rgb(233, 68, 27);
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
 #list-box .title-box {
     font-size: 14px;
     font-weight: bold;
@@ -453,6 +505,16 @@ export default {
 
 :deep(.van-nav-bar__title) {
     max-width: 70%;
-    margin-left: 23%;
+    margin-left: 18%;
+}
+
+.vip-box {
+    font-size: 20px;
+    color: red;
+}
+
+:deep(.van-popup),
+:deep(.van-dialog__message) {
+    background: red !important;
 }
 </style>

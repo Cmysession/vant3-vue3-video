@@ -31,6 +31,7 @@
                     <div class="item-box" v-for="(item, index) in init.dataLists" :key="index" @click="rowInfo(item)">
                         <div class="cover-box">
                             <img :src="item.cover">
+                            <div  v-if="!item.is_ad&&item.vip" class="vip-box"><van-icon name="medal" /></div>
                             <div v-if="!item.is_ad" class="times-box">{{ item.times }}</div>
                         </div>
                         <div class="title-box">
@@ -103,6 +104,7 @@ export default {
                     times: '13:15',
                     views: '1000',
                     history: '2021-01-03 12:30',
+                    vip:true, // 会员
                     is_ad: false,
                     jump_out: false,
                     link: 'www.baidu.com',
@@ -113,6 +115,7 @@ export default {
                     times: '1:07:35',
                     views: '1000',
                     history: '2021-01-03 12:30',
+                    vip:true, // 会员
                     is_ad: false,
                     jump_out: false,
                     link: 'www.baidu.com',
@@ -424,9 +427,19 @@ export default {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    font-size: 12px;
+    font-size: 13px;
     color: #FFFFFF;
     background: #000000cc;
+    padding: 2px 5px;
+    border-radius: 5px;
+    
+}
+#data-list-box .cover-box .vip-box{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 30px;
+    color: rgb(233, 68, 27);
     padding: 2px 5px;
     border-radius: 5px;
 }
@@ -489,4 +502,5 @@ export default {
     height: 12vh;
     z-index: 99;
 }
+
 </style>

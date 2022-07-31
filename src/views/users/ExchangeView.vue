@@ -7,7 +7,7 @@
         <div id="body-box">
             <van-form @submit="onSubmit">
                 <van-cell-group inset>
-                    <van-field v-model="init.code" name="code" label="兑换码" placeholder="请输入兑换码"
+                    <van-field v-model="init.code" autocomplete="off" name="code" label="兑换码" placeholder="请输入兑换码"
                         :rules="[{ required: true, message: '请填写兑换码' }]" />
                 </van-cell-group>
                 <div style="margin: 16px;">

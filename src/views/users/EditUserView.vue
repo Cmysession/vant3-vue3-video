@@ -7,11 +7,11 @@
         <div id="body-box">
             <van-form @submit="onSubmit">
                 <van-cell-group inset>
-                    <van-field v-model="init.oldPassword" type="password" name="oldPassword" label="旧密码" placeholder="旧密码"
+                    <van-field v-model="init.oldPassword" type="password" autocomplete="off" name="oldPassword" label="旧密码" placeholder="旧密码"
                         :rules="[{ required: true, message: '请填旧密码' }]" />
-                    <van-field v-model="init.newPassword" type="password" name="newPassword" label="新密码" placeholder="新密码"
+                    <van-field v-model="init.newPassword" type="password" autocomplete="off" name="newPassword" label="新密码" placeholder="新密码"
                         :rules="[{ required: true, message: '请填写新密码' }]" />
-                    <van-field v-model="init.rePassword" type="password" name="rePassword" label="确认密码" placeholder="确认密码"
+                    <van-field v-model="init.rePassword" type="password" autocomplete="off" name="rePassword" label="确认密码" placeholder="确认密码"
                         :rules="[{ required: true, message: '请确认密码' }]" />
                 </van-cell-group>
                 <div style="margin: 16px;">
