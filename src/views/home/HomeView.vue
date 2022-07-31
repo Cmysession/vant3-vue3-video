@@ -43,7 +43,7 @@
                         <div class="ad-box" v-if="item.is_ad">
                             <van-button type="primary" block
                                 color="linear-gradient(to right, rgb(135 135 135), rgb(101 101 101))">
-                                {{ item.is_dow === true ? "点击下载" : "点击访问" }}
+                                {{ item.btn_txt }}
                             </van-button>
                         </div>
                     </div>
@@ -82,18 +82,20 @@ export default {
                     views: '1000',
                     history: '2021-01-03 12:30',
                     is_ad: true,// 是否广告
-                    is_dow: true,
+                    jump_out: true, //  外跳。内跳
                     link: 'www.baidu.com',
+                    btn_txt: '点击下载',
                 },
                 {
                     cover: 'https://i.ytimg.com/vi/q2zj74iK1MI/hqdefault.jpg',
-                    title: '合辑 - 房東的貓 - 【春風十里】MV 我說所有的酒都不如你',
+                    title: '最新会员免费了了哦',
                     times: '0:15',
                     views: '1000',
                     history: '2021-01-03 12:30',
                     is_ad: true,// 是否广告
-                    is_dow: false,
-                    link: 'www.baidu.com',
+                    jump_out: false,
+                    link: '/combo',
+                    btn_txt: '点击访问',
                 },
                 {
                     cover: 'https://i.ytimg.com/vi/7ev9uLONeQo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBLeAnXvkPSrr9_6oICQK5Q9i7PhA',
@@ -102,7 +104,7 @@ export default {
                     views: '1000',
                     history: '2021-01-03 12:30',
                     is_ad: false,
-                    is_dow: false,
+                    jump_out: false,
                     link: 'www.baidu.com',
                 },
                 {
@@ -112,7 +114,7 @@ export default {
                     views: '1000',
                     history: '2021-01-03 12:30',
                     is_ad: false,
-                    is_dow: false,
+                    jump_out: false,
                     link: 'www.baidu.com',
                 }
             ],
@@ -230,9 +232,16 @@ export default {
          */
         const rowInfo = function (row) {
             if (row.is_ad) {
-                toLink(row.link)
+                if (row.jump_out) {
+                    // 外跳广告
+                    toLink(row.link)
+                    return false
+                }
+                // 内跳广告
+                router.push(row.link)
                 return false
             }
+
             router.push({
                 name: 'video-view',
                 query: {
@@ -264,7 +273,7 @@ export default {
         const onToView = function (name) {
             router.push({ name: name })
         }
-        
+
         onMounted(function () {
 
         })
@@ -378,15 +387,19 @@ export default {
     width: 100%;
     padding-top: 12vh;
 }
+
 #data-list-box::-webkit-scrollbar {
-  display: none; /* Chrome Safari */
+    display: none;
+    /* Chrome Safari */
 }
 
-#data-list-box{
-  scrollbar-width: none; /* firefox */
-  -ms-overflow-style: none; /* IE 10+ */
-  overflow-x: hidden;
-  overflow-y: auto;
+#data-list-box {
+    scrollbar-width: none;
+    /* firefox */
+    -ms-overflow-style: none;
+    /* IE 10+ */
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #data-list-box .item-box {
