@@ -9,12 +9,12 @@
 
                 <div class="my-money-info">
                     <van-cell-group inset>
-                        <van-cell :title="init.username" label="邀请码：CODEOUIO">
+                        <van-cell :title="init.username" label="邀请码：CODEOUIO | 到期时间:2010-99-99 12:12">
                         </van-cell>
                         <van-cell>
                             <van-grid :column-num="3" :border="false">
-                                <van-grid-item icon="medal-o" text="等级:游客" />
-                                <van-grid-item icon="gold-coin-o" text="余额:100" />
+                                <van-grid-item to="/vip-info" icon="medal-o" text="等级:游客" />
+                                <van-grid-item to="/vip-info" icon="balance-list-o" text="金币:9999" />
                                 <van-grid-item to="/combo" icon="cash-back-record" text="购买套餐" />
                             </van-grid>
                         </van-cell>
@@ -40,6 +40,10 @@
 
                     <van-cell-group inset>
                         <van-cell icon="edit" title="修改密码" is-link to="/edit-user" />
+                    </van-cell-group>
+
+                    <van-cell-group inset>
+                        <van-cell icon="other-pay" title="产品介绍" is-link to="/vip-info" />
                     </van-cell-group>
 
                 </div>

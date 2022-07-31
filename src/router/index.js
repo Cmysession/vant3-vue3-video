@@ -67,7 +67,13 @@ const routes = [
         path: '/combo', // 套餐
         name: 'combo-view',
         component: () => import(/* webpackChunkName: "ComboView" */ '../views/users/ComboView.vue'),
-        meta: { keepAlive: false, scrollTop: 0 },
+        meta: { keepAlive: true, scrollTop: 0 },
+      },
+      {
+        path: '/vip-info', // 会员和金币详情
+        name: 'vip-info-view',
+        component: () => import(/* webpackChunkName: "ComboView" */ '../views/users/VipInfoView.vue'),
+        meta: { keepAlive: true, scrollTop: 0 },
       },
     ]
   },
