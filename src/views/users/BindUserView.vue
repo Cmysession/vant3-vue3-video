@@ -7,9 +7,9 @@
         <div id="body-box">
             <van-form @submit="onSubmit">
                 <van-cell-group inset>
-                    <van-field v-model="init.username" name="登陆账号" label="登陆账号" placeholder="绑定账号后无法更改"
+                    <van-field v-model="init.username" name="username" label="登陆账号" placeholder="绑定账号后无法更改"
                         :rules="[{ required: true, message: '请填写登陆账号' }]" />
-                    <van-field v-model="init.password" type="password" name="登陆密码" label="登陆密码" placeholder="登陆密码"
+                    <van-field v-model="init.password" name="password" type="password" label="登陆密码" placeholder="登陆密码"
                         :rules="[{ required: true, message: '请填写登陆密码' }]" />
                 </van-cell-group>
                 <div style="margin: 16px;">

@@ -3,7 +3,7 @@ const routes = [
   {
     path: '/',
     name: '/index-view',
-    component: () => import(/* webpackChunkName: "IndexView" */ '../views/index/indexView.vue'),
+    component: () => import(/* webpackChunkName: "IndexView" */ '../views/index/IndexView.vue'),
     meta: { keepAlive: true, scrollTop: 0 },
     children: [
       {
@@ -55,6 +55,12 @@ const routes = [
         path: '/edit-user', // 修改用户
         name: 'edit-user-view',
         component: () => import(/* webpackChunkName: "BindUserView" */ '../views/users/EditUserView.vue'),
+        meta: { keepAlive: false, scrollTop: 0 },
+      },
+      {
+        path: '/exchange', // 福利兑换
+        name: 'exchange-view',
+        component: () => import(/* webpackChunkName: "ComboView" */ '../views/users/ExchangeView.vue'),
         meta: { keepAlive: false, scrollTop: 0 },
       },
       {

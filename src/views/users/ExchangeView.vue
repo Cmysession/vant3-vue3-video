@@ -7,16 +7,12 @@
         <div id="body-box">
             <van-form @submit="onSubmit">
                 <van-cell-group inset>
-                    <van-field v-model="init.oldPassword" type="password" name="oldPassword" label="旧密码" placeholder="旧密码"
-                        :rules="[{ required: true, message: '请填旧密码' }]" />
-                    <van-field v-model="init.newPassword" type="password" name="newPassword" label="新密码" placeholder="新密码"
-                        :rules="[{ required: true, message: '请填写新密码' }]" />
-                    <van-field v-model="init.rePassword" type="password" name="rePassword" label="确认密码" placeholder="确认密码"
-                        :rules="[{ required: true, message: '请确认密码' }]" />
+                    <van-field v-model="init.code" name="code" label="兑换码" placeholder="请输入兑换码"
+                        :rules="[{ required: true, message: '请填写兑换码' }]" />
                 </van-cell-group>
                 <div style="margin: 16px;">
                     <van-button round block type="primary" native-type="submit">
-                        {{ init.title }}
+                        {{init.title}}
                     </van-button>
                 </div>
             </van-form>
@@ -32,10 +28,8 @@ export default {
         const onClickLeft = () => history.back()
 
         const init = reactive({
-            title: "修改密码",
-            oldPassword: "",
-            newPassword: "",
-            rePassword: ""
+            title: "福利兑换",
+            code: "",
         })
 
         const onSubmit = (values) => {

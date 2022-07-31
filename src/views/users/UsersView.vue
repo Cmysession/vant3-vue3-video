@@ -23,7 +23,7 @@
 
                 <div class="oth-box">
                     <van-cell-group inset>
-                        <van-cell icon="coupon-o" title="福利兑换" is-link />
+                        <van-cell icon="coupon-o" title="福利兑换" to="/exchange"  is-link />
                     </van-cell-group>
 
                     <van-cell-group inset>
