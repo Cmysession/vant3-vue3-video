@@ -15,7 +15,7 @@
                             <van-grid :column-num="3" :border="false">
                                 <van-grid-item icon="medal-o" text="等级:游客" />
                                 <van-grid-item to="/combo" icon="cash-back-record" text="购买套餐" />
-                                <van-grid-item icon="balance-list-o" text="消费记录" />
+                                <van-grid-item to="/user-record" icon="balance-list-o" text="消费记录" />
                                 
                             </van-grid>
                         </van-cell>

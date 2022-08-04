@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="content-box">
         <div id="back-box">
             <van-nav-bar left-arrow left-text="返回" @click-left="onClickLeft" class="header-box" :title="init.title">
             </van-nav-bar>
@@ -15,19 +15,6 @@
                 <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
                 <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
                 <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
-                <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" /><van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
-                <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
-                <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
-                <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
-                <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" /><van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
-                <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
-                <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
-                <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
-                <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" /><van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
-                <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
-                <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
-                <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
-                <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" /><van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
                 <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
                 <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
                 <van-cell center title="2021-20-20 10:99" value="¥ 20 元" label="购买会员" />
@@ -94,4 +81,21 @@ export default {
     font-weight: bold;
     color: #b34d4d;
 }
+
+#content-box {
+    height: 100vh;
+    position: relative;
+    overflow-y: auto;
+    scrollbar-width: none;
+    /* Firefox */
+
+    -ms-overflow-style: none;
+    /* IE 10+ */
+}
+
+#content-box::-webkit-scrollbar {
+    display: none;
+    /* Chrome Safari */
+}
+
 </style>
