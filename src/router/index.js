@@ -54,13 +54,13 @@ const routes = [
       {
         path: '/edit-user', // 修改用户
         name: 'edit-user-view',
-        component: () => import(/* webpackChunkName: "BindUserView" */ '../views/users/EditUserView.vue'),
+        component: () => import(/* webpackChunkName: "EditUserView" */ '../views/users/EditUserView.vue'),
         meta: { keepAlive: false, scrollTop: 0 },
       },
       {
         path: '/exchange', // 福利兑换
         name: 'exchange-view',
-        component: () => import(/* webpackChunkName: "ComboView" */ '../views/users/ExchangeView.vue'),
+        component: () => import(/* webpackChunkName: "ExchangeView" */ '../views/users/ExchangeView.vue'),
         meta: { keepAlive: false, scrollTop: 0 },
       },
       {
@@ -72,7 +72,13 @@ const routes = [
       {
         path: '/vip-info', // 会员和金币详情
         name: 'vip-info-view',
-        component: () => import(/* webpackChunkName: "ComboView" */ '../views/users/VipInfoView.vue'),
+        component: () => import(/* webpackChunkName: "VipView" */ '../views/users/VipInfoView.vue'),
+        meta: { keepAlive: true, scrollTop: 0 },
+      },
+      {
+        path: '/user-record', // 消费记录
+        name: 'user-record-view',
+        component: () => import(/* webpackChunkName: "RecordView" */ '../views/users/UserRecord.vue'),
         meta: { keepAlive: true, scrollTop: 0 },
       },
     ]

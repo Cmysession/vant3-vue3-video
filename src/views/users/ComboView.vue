@@ -108,7 +108,7 @@ export default {
 }
 
 #body-box {
-    margin: 50px 0;
+    margin: 60px 0;
 }
 
 :deep(.van-nav-bar) {

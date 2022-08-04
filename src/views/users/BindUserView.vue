@@ -62,8 +62,15 @@ export default {
     color: #c3c3c3;
 }
 
+#back-box {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+}
+
 #body-box {
-    margin-top: 10px;
+    margin: 60px 0;
 }
 
 .van-cell,

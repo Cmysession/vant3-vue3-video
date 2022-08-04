@@ -32,7 +32,7 @@
                     </van-cell-group>
 
                     <van-cell-group inset>
-                        <van-cell icon="balance-list-o" title="消费记录" is-link to="/" />
+                        <van-cell icon="balance-list-o" title="消费记录" is-link to="/user-record" />
                     </van-cell-group>
 
                     <van-cell-group inset>
