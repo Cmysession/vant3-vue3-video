@@ -8,8 +8,9 @@
             </div>
 
             <div id="videoInfo">
-                <vue3VideoPlay  ref="videoRef" v-bind="options" :src="options.src" :type="options.type"
-                    :poster='options.poster' />
+                <vue3VideoPlay v-if="options.src" ref="videoRef" v-bind="options" :src="options.src"
+                    :type="options.type" :poster='options.poster' />
+                <div class="txt-info" @click="onClickRight" v-if="!options.src">加载失败!点击重新加载!</div>
             </div>
         </div>
 
@@ -96,7 +97,7 @@ export default {
             poster: '', //视频图片
             width: "100%",
             height: '250px',
-            // src: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", //视频源
+            src: "", //视频源
             type: "m3u8", //视频类型
             title: '',
             autoPlay: true,
@@ -177,6 +178,10 @@ export default {
 
 
         onBeforeRouteUpdate((to) => {
+            if (options.src) {
+                videoRef.value.pause()
+            }
+            options.src = null
             // 当更URL换时重新获取数据
             init.rowData = getData(to.query.row)
             init.dataLists = []
@@ -222,23 +227,12 @@ export default {
          */
         const onClickLeft = function () {
             // 清除播放数据
-            videoRef.value.pause()
+            if (options.src) {
+                videoRef.value.pause()
+            }
             options.src = null
             history.back()
         }
-
-        /**
-         * 点击标签
-         * @param {*} value 
-         */
-        const onClickTags = function (value) {
-            videoRef.value.pause()
-            router.push({
-                name: 'search-view',
-                query: { search: "#" + value }
-            })
-        }
-
 
         /**
          * 视频详情
@@ -249,13 +243,13 @@ export default {
                 toLink(row.link)
                 return false
             }
-            videoRef.value.pause() // 停止播放
+            if (options.src) {
+                videoRef.value.pause()
+            } // 停止播放
             options.src = null
             router.replace({
-                // name: 'back-view',
                 name: 'video-view',
                 query: {
-                    // path: 'video-view',
                     row: setData(row)
                 }
             })
@@ -265,6 +259,10 @@ export default {
          * 刷新
          */
         const onClickRight = function () {
+            if (options.src) {
+                videoRef.value.pause()
+            } // 停止播放
+            options.src = null
             window.location.reload()
         }
 
@@ -273,6 +271,10 @@ export default {
          * @param {*} name 
          */
         const onToView = function (name) {
+            if (options.src) {
+                videoRef.value.pause()
+            } // 停止播放
+            options.src = null
             router.push({ name: name })
         }
 
@@ -281,7 +283,9 @@ export default {
          * @param {*} item 
          */
         const toLink = function (link) {
-            videoRef.value.pause() // 停止播放
+            if (options.src) {
+                videoRef.value.pause()
+            } // 停止播放
             window.open('//' + link, link)
         }
 
@@ -309,7 +313,7 @@ export default {
             getInfo()
         })
         return {
-            init, onClickLeft, options, onClickTags, onLoad, rowInfo, videoRef, onToView, onClickRight
+            init, onClickLeft, options, onLoad, rowInfo, videoRef, onToView, onClickRight
         }
     }
 }
@@ -405,6 +409,17 @@ export default {
 
 #body-box #recommend-box {
     margin: 10px 0;
+}
+
+#videoInfo {
+    height: 250px;
+    background: #000000;
+    text-align: center;
+}
+
+#videoInfo .txt-info {
+    font-weight: bold;
+    line-height: 250px;
 }
 
 #body-box #recommend-box .recommend-title {
