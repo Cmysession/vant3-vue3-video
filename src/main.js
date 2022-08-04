@@ -6,8 +6,6 @@ import {
     Button, Icon, List, NavBar, Tag, Col, Row, Field, CellGroup, Cell, Form, Card, SubmitBar,RadioGroup, Radio 
 } from 'vant'
 import publicCss from './style/public.css'
-import vue3videoPlay from "vue3-video-play" // 引入组件
-import "vue3-video-play/dist/style.css" // 引入css
 
 createApp(App)
     .use(store)
@@ -23,7 +21,6 @@ createApp(App)
     .use(Cell)
     .use(CellGroup)
     .use(Form)
-    .use(vue3videoPlay)
     .use(Card)
     .use(RadioGroup)
     .use(Radio)

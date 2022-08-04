@@ -8,7 +8,7 @@
             </div>
 
             <div id="videoInfo">
-                <vue3VideoPlay v-if="options.src" ref="videoRef" v-bind="options" :src="options.src"
+                <videoPlay v-if="options.src" ref="videoRef" v-bind="options" :src="options.src"
                     :type="options.type" :poster='options.poster' />
                 <div class="txt-info" @click="onClickRight" v-if="!options.src">加载失败!点击重新加载!</div>
             </div>
@@ -77,7 +77,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import { getData, setData } from '@/tools/DataInfo'
 import 'vant/es/dialog/style'
@@ -86,8 +85,12 @@ import { onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { onBeforeRouteUpdate } from "vue-router"
 
+import "vue3-video-play/dist/style.css" // 引入css
+import { videoPlay } from "vue3-video-play" // 引入组件
+
 export default {
     components: {
+        videoPlay,
         [Dialog.Component.name]: Dialog.Component,
     },
     setup() {
