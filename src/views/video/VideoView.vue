@@ -8,8 +8,8 @@
             </div>
 
             <div id="videoInfo">
-                <videoPlay v-if="options.src" ref="videoRef" v-bind="options" :src="options.src"
-                    :type="options.type" :poster='options.poster' />
+                <videoPlay v-if="options.src" ref="videoRef" v-bind="options" :src="options.src" :type="options.type"
+                    :poster='options.poster' />
                 <div class="txt-info" @click="onClickRight" v-if="!options.src">加载失败!点击重新加载!</div>
             </div>
         </div>
@@ -262,11 +262,18 @@ export default {
          * 刷新
          */
         const onClickRight = function () {
-            if (options.src) {
-                videoRef.value.pause()
-            } // 停止播放
-            options.src = null
-            window.location.reload()
+            // console.log(videoRef.value)
+            // videoRef.value.togglePlay()
+            // videoRef.value.dispose()
+            // if (options.src) {
+            //     videoRef.value.pause()
+            // } // 停止播放
+            // options.src = null
+            // window.location.reload()
+            // let video = document.getElementById('dPlayerVideoMain')
+            // // video.pause();
+            // // video.removeAttribute('src','123123'); // empty source
+            // video.load();  
         }
 
         /**
