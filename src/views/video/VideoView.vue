@@ -91,6 +91,7 @@ export default {
         const init = reactive({
             rowData: {},
             iframeSrc: '',
+            backNum: 1,
             dataLists: [
                 {
                     cover: 'https://i.ytimg.com/vi/q2zj74iK1MI/hqdefault.jpg',
@@ -156,6 +157,7 @@ export default {
 
 
         onBeforeRouteUpdate((to) => {
+            init.backNum += 1
             // 当更URL换时重新获取数据
             init.rowData = getData(to.query.row)
             console.log(init.rowData)
@@ -199,7 +201,8 @@ export default {
          * 返回事件
          */
         const onClickLeft = function () {
-            history.back()
+            // history.back()
+            router.go(- init.backNum)
         }
 
         /**
