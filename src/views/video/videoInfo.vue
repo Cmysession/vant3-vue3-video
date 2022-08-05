@@ -8,17 +8,20 @@
 
 import "vue3-video-play/dist/style.css" // 引入css
 import { videoPlay } from "vue3-video-play" // 引入组件
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import { axiosGet } from "@/axios/http"
 export default {
     components: {
         videoPlay,
     },
     setup() {
+        const videoRef = ref(null)
+
         const options = reactive({
             poster: '', //视频图片
             width: "100%",
             height: '250px',
-            src: '', //视频源
+            src: "", //视频源
             type: "m3u8", //视频类型
             title: '123',
             autoPlay: true,
@@ -36,6 +39,10 @@ export default {
         }
         onMounted(function () {
             options.src = getQueryVariable('src')
+            console.log(videoRef)
+            axiosGet('1.ebv').then(function(data){
+                console.log(data)
+            })
         })
         return { options }
     }
