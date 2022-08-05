@@ -82,6 +82,7 @@ export default {
                     times: '9:37',
                     views: '1000',
                     history: '2021-01-03 12:30',
+                    vip: false, // 会员
                     is_ad: true,// 是否广告
                     jump_out: true, //  外跳。内跳
                     link: 'www.baidu.com',
@@ -93,6 +94,7 @@ export default {
                     times: '0:15',
                     views: '1000',
                     history: '2021-01-03 12:30',
+                    vip: false, // 会员
                     is_ad: true,// 是否广告
                     jump_out: false,
                     link: '/combo',

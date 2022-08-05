@@ -8,7 +8,7 @@
             </div>
 
             <div id="videoInfo">
-                <iframe src="/video-info" style="width:100%;height:250px" frameborder="0"></iframe>
+                <iframe :src="init.iframeSrc" style="width:100%;height:250px" frameborder="0"></iframe>
             </div>
         </div>
 
@@ -54,10 +54,6 @@
                             <div class="title-box">
                                 {{ item.title }}
                             </div>
-                            <!-- <div class="info-box">
-                                <div><span class="dian">.</span>{{ item.views }}次观看</div>
-                                <div><span class="dian">.</span>{{ item.history }}</div>
-                            </div> -->
                             <div class="info-box" v-if="!item.is_ad">
                                 <div><span class="dian">.</span>{{ item.views }}次观看</div>
                                 <div><span class="dian">.</span>{{ item.history }}</div>
@@ -65,7 +61,7 @@
                             <div class="ad-box" v-if="item.is_ad">
                                 <van-button type="primary" block
                                     color="linear-gradient(to right, rgb(135 135 135), rgb(101 101 101))">
-                                    {{ item.is_dow === true ? "点击下载" : "点击访问" }}
+                                    {{ item.btn_txt }}
                                 </van-button>
                             </div>
                         </div>
@@ -94,50 +90,19 @@ export default {
 
         const init = reactive({
             rowData: {},
+            iframeSrc: '',
             dataLists: [
                 {
-                    cover: 'https://i.ytimg.com/vi/nhUNJhM_NAk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAsb3JqJRzblxGurHeuZ7RQGiWq1w',
-                    title: '小米34寸带鱼屏显示器对比体验，不输三星和宏碁，看完就知道该买谁了！',
-                    times: '9:37',
-                    views: '1000',
-                    history: '2021-01-03 12:30',
-                    is_ad: true,// 是否广告
-                    is_dow: true,
-                    vip: true,
-                    link: 'www.baidu.com',
-                },
-                {
                     cover: 'https://i.ytimg.com/vi/q2zj74iK1MI/hqdefault.jpg',
-                    title: '合辑 - 房東的貓 - 【春風十里】MV 我說所有的酒都不如你',
+                    title: '最新会员免费了了哦',
                     times: '0:15',
                     views: '1000',
                     history: '2021-01-03 12:30',
-                    vip: true,
-                    is_ad: true,// 是否广告
-                    is_dow: false,
-                    link: 'www.baidu.com',
-                },
-                {
-                    cover: 'https://i.ytimg.com/vi/nhUNJhM_NAk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAsb3JqJRzblxGurHeuZ7RQGiWq1w',
-                    title: '小米34寸带鱼屏显示器对比体验，不输三星和宏碁，看完就知道该买谁了！',
-                    times: '9:37',
-                    views: '1000',
-                    history: '2021-01-03 12:30',
-                    vip: true,
+                    vip: false, // 会员
                     is_ad: false,// 是否广告
-                    is_dow: false,
-                    link: 'www.baidu.com',
-                },
-                {
-                    cover: 'https://i.ytimg.com/vi/q2zj74iK1MI/hqdefault.jpg',
-                    title: '合辑 - 房東的貓 - 【春風十里】MV 我說所有的酒都不如你',
-                    times: '0:15',
-                    views: '1000',
-                    history: '2021-01-03 12:30',
-                    vip: true,
-                    is_ad: false,// 是否广告
-                    is_dow: false,
-                    link: 'www.baidu.com',
+                    jump_out: false,
+                    link: '',
+                    btn_txt: '',
                 },
                 {
                     cover: 'https://i.ytimg.com/vi/7ev9uLONeQo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBLeAnXvkPSrr9_6oICQK5Q9i7PhA',
@@ -145,19 +110,47 @@ export default {
                     times: '13:15',
                     views: '1000',
                     history: '2021-01-03 12:30',
-                    is_ad: false,
-                    is_dow: false,
-                    link: 'www.baidu.com',
+                    vip: false, // 会员
+                    is_ad: false,// 是否广告
+                    jump_out: false,
+                    link: '',
+                    btn_txt: '',
                 },
                 {
-                    cover: 'https://i.ytimg.com/vi/8QgeDkfjrk0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAhXhrh28qsNIzI6ijgCJ2Ayw2vdA',
-                    title: '三国战记：史诗级赵云秒14突破极限！里程碑式的突破！【深邃狼眼睛】',
-                    times: '1:07:35',
+                    cover: 'https://i.ytimg.com/vi/nhUNJhM_NAk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAsb3JqJRzblxGurHeuZ7RQGiWq1w',
+                    title: '小米34寸带鱼屏显示器对比体验，不输三星和宏碁，看完就知道该买谁了！',
+                    times: '9:37',
                     views: '1000',
                     history: '2021-01-03 12:30',
+                    vip: false, // 会员
+                    is_ad: true,// 是否广告
+                    jump_out: true, //  外跳。内跳
+                    link: 'www.baidu.com',
+                    btn_txt: '点击下载',
+                },
+                {
+                    cover: 'https://i.ytimg.com/vi/q2zj74iK1MI/hqdefault.jpg',
+                    title: '最新会员免费了了哦',
+                    times: '0:15',
+                    views: '1000',
+                    history: '2021-01-03 12:30',
+                    vip: false, // 会员
+                    is_ad: true,// 是否广告
+                    jump_out: false,
+                    link: '/combo',
+                    btn_txt: '点击访问',
+                },
+                {
+                    cover: 'https://i.ytimg.com/vi/7ev9uLONeQo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBLeAnXvkPSrr9_6oICQK5Q9i7PhA',
+                    title: '【小品】《你好！打劫》#文松 #杨树林 #田娃 #娇娇 #贾舒涵 — 蠢贼误闯片场遇同行，打劫不成转演戏~【SMG上海东方卫视欢乐频道】',
+                    times: '13:15',
+                    views: '1000',
+                    history: '2021-01-03 12:30',
+                    vip: true, // 会员
                     is_ad: false,
-                    is_dow: false,
-                }
+                    jump_out: false,
+                    link: 'www.baidu.com',
+                },
             ],
         })
 
@@ -165,6 +158,7 @@ export default {
         onBeforeRouteUpdate((to) => {
             // 当更URL换时重新获取数据
             init.rowData = getData(to.query.row)
+            console.log(init.rowData)
             init.dataLists = []
             if (init.rowData.vip) {
                 Dialog.alert({
@@ -175,6 +169,7 @@ export default {
                 })
                 return
             }
+            init.iframeSrc = '/video-info?src=https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8?num=' + Math.random()
         });
 
         const onLoad = () => {
@@ -213,7 +208,13 @@ export default {
          */
         const rowInfo = function (row) {
             if (row.is_ad) {
-                toLink(row.link)
+                if (row.jump_out) {
+                    // 外跳广告
+                    toLink(row.link)
+                    return false
+                }
+                // 内跳广告
+                router.push(row.link)
                 return false
             }
             router.replace({
@@ -248,9 +249,8 @@ export default {
         }
 
         const getInfo = function () {
-
             init.rowData = getData(route.query.row)
-
+            console.log(init.rowData)
             if (init.rowData.vip) {
                 Dialog.alert({
                     message: '此视频需要开通会员！',
@@ -260,6 +260,7 @@ export default {
                 })
                 return
             }
+            init.iframeSrc = '/video-info?src=https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8?num=' + Math.random()
         }
 
         onMounted(function () {
