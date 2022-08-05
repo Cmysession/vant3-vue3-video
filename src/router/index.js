@@ -90,6 +90,13 @@ const routes = [
     meta: { keepAlive: true, scrollTop: 0 },
   },
 
+  {
+    path: '/video-info', // 视频页面
+    name: 'video-info-view',
+    component: () => import(/* webpackChunkName: "VideoView" */ '../views/video/videoInfo.vue'),
+    meta: { keepAlive: false, scrollTop: 0 },
+  },
+
 ]
 
 const router = createRouter({

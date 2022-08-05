@@ -8,9 +8,7 @@
             </div>
 
             <div id="videoInfo">
-                <videoPlay v-if="options.src" ref="videoRef" v-bind="options" :src="options.src" :type="options.type"
-                    :poster='options.poster' />
-                <div class="txt-info" @click="onClickRight" v-if="!options.src">加载失败!点击重新加载!</div>
+                <iframe src="/video-info" style="width:100%;height:250px" frameborder="0"></iframe>
             </div>
         </div>
 
@@ -81,32 +79,16 @@
 import { getData, setData } from '@/tools/DataInfo'
 import 'vant/es/dialog/style'
 import { Dialog } from 'vant'
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { onBeforeRouteUpdate } from "vue-router"
 
-import "vue3-video-play/dist/style.css" // 引入css
-import { videoPlay } from "vue3-video-play" // 引入组件
-
 export default {
     components: {
-        videoPlay,
         [Dialog.Component.name]: Dialog.Component,
     },
     setup() {
         const router = useRouter()
-        const videoRef = ref(null)
-        const options = reactive({
-            poster: '', //视频图片
-            width: "100%",
-            height: '250px',
-            src: "", //视频源
-            type: "m3u8", //视频类型
-            title: '',
-            autoPlay: true,
-            muted: false,
-            speedRate: ["2.0", "1.0", "1.5", "1.25", "0.75", "0.5"],
-        });
         const route = useRoute()
 
 
@@ -181,15 +163,9 @@ export default {
 
 
         onBeforeRouteUpdate((to) => {
-            if (options.src) {
-                videoRef.value.pause()
-            }
-            options.src = null
             // 当更URL换时重新获取数据
             init.rowData = getData(to.query.row)
             init.dataLists = []
-            options.title = init.rowData.title
-            options.options = init.rowData.cover
             if (init.rowData.vip) {
                 Dialog.alert({
                     message: '此视频需要开通会员！',
@@ -199,7 +175,6 @@ export default {
                 })
                 return
             }
-            options.src = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
         });
 
         const onLoad = () => {
@@ -229,11 +204,6 @@ export default {
          * 返回事件
          */
         const onClickLeft = function () {
-            // 清除播放数据
-            if (options.src) {
-                videoRef.value.pause()
-            }
-            options.src = null
             history.back()
         }
 
@@ -246,10 +216,6 @@ export default {
                 toLink(row.link)
                 return false
             }
-            if (options.src) {
-                videoRef.value.pause()
-            } // 停止播放
-            options.src = null
             router.replace({
                 name: 'video-view',
                 query: {
@@ -262,18 +228,7 @@ export default {
          * 刷新
          */
         const onClickRight = function () {
-            // console.log(videoRef.value)
-            // videoRef.value.togglePlay()
-            // videoRef.value.dispose()
-            // if (options.src) {
-            //     videoRef.value.pause()
-            // } // 停止播放
-            // options.src = null
-            // window.location.reload()
-            // let video = document.getElementById('dPlayerVideoMain')
-            // // video.pause();
-            // // video.removeAttribute('src','123123'); // empty source
-            // video.load();  
+            window.location.reload()
         }
 
         /**
@@ -281,10 +236,6 @@ export default {
          * @param {*} name 
          */
         const onToView = function (name) {
-            if (options.src) {
-                videoRef.value.pause()
-            } // 停止播放
-            options.src = null
             router.push({ name: name })
         }
 
@@ -293,9 +244,6 @@ export default {
          * @param {*} item 
          */
         const toLink = function (link) {
-            if (options.src) {
-                videoRef.value.pause()
-            } // 停止播放
             window.open('//' + link, link)
         }
 
@@ -312,18 +260,13 @@ export default {
                 })
                 return
             }
-
-            options.title = init.rowData.title
-            options.options = init.rowData.cover
-            options.src = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
         }
-
 
         onMounted(function () {
             getInfo()
         })
         return {
-            init, onClickLeft, options, onLoad, rowInfo, videoRef, onToView, onClickRight
+            init, onClickLeft, onLoad, rowInfo, onToView, onClickRight
         }
     }
 }
