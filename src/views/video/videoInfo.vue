@@ -8,15 +8,12 @@
 
 import "vue3-video-play/dist/style.css" // 引入css
 import { videoPlay } from "vue3-video-play" // 引入组件
-import { onMounted, reactive, ref } from 'vue'
-import { axiosGet } from "@/axios/http"
+import { onMounted, reactive } from 'vue'
 export default {
     components: {
         videoPlay,
     },
     setup() {
-        const videoRef = ref(null)
-
         const options = reactive({
             poster: '', //视频图片
             width: "100%",
@@ -39,10 +36,6 @@ export default {
         }
         onMounted(function () {
             options.src = getQueryVariable('src')
-            console.log(videoRef)
-            axiosGet('1.ebv').then(function(data){
-                console.log(data)
-            })
         })
         return { options }
     }
