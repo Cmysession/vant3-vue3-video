@@ -171,7 +171,7 @@ export default {
                 })
                 return
             }
-            init.iframeSrc = '/video-info?src=https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8?num=' + Math.random()
+            init.iframeSrc = '/video-info?src=https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8?num=' + new Date().getTime()
         });
 
         const onLoad = () => {
@@ -255,7 +255,7 @@ export default {
                 })
                 return
             }
-            init.iframeSrc = '/video-info?src=https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8?num=' + Math.random()
+            init.iframeSrc = '/video-info?src=https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8?num=' + new Date().getTime()
         }
 
         onMounted(function () {
