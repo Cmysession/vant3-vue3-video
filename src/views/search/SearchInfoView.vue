@@ -132,11 +132,6 @@ export default {
             window.open('//' + link, link)
         }
 
-
-        onMounted(function () {
-
-        })
-
         onMounted(function () {
             if (route.query && route.query.search) {
                 init.searchValue = route.query.search
@@ -153,7 +148,6 @@ export default {
          * 记住滚动状态
          */
         let searchScrollTop = getSessionItem('searchScrollTop')
-        console.log(searchScrollTop)
         if (searchScrollTop) {
             document.getElementById('search-list-box').scrollTop = searchScrollTop
         }
