@@ -233,14 +233,6 @@ export default {
         }
 
         /**
-         * 跳转其他页面
-         * @param {*} name 
-         */
-        const onToView = function (name) {
-            router.push({ name: name })
-        }
-
-        /**
          * 点击广告
          * @param {*} item 
          */
@@ -267,7 +259,7 @@ export default {
             getInfo()
         })
         return {
-            init, onClickLeft, onLoad, rowInfo, onToView, onClickRight
+            init, onClickLeft, onLoad, rowInfo, onClickRight
         }
     }
 }
