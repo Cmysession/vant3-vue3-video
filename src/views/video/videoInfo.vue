@@ -1,8 +1,6 @@
 <template>
     <div>
-        <video width="100%" height="250px" id="my-player" class="video-js" webkit-playsinline="true" playsinline="true"
-            controls preload="auto" :poster="options.poster" data-setup='{}' muted>
-        </video>
+        <div id="mui-player"></div>
     </div>
 </template>
 <script>
@@ -11,9 +9,9 @@
 import { onMounted, reactive } from 'vue'
 
 // 引入video.js先关的js和css
-import videojs from 'video.js'
-import "video.js/dist/video-js.min.css"
-
+import 'mui-player/dist/mui-player.min.css'
+import MuiPlayer from 'mui-player'
+import Hls from 'hls.js'
 export default {
     components: {
 
@@ -62,22 +60,23 @@ export default {
         }
         onMounted(function () {
             options.src = getQueryVariable('src')
-            let myPlayer = videojs('my-player', options)
-            let elVideo = document.getElementsByTagName('video')[0]
-            console.log(elVideo.setAttribute('A123', 'A123'))
-            myPlayer.on('componentresize', function () {
-                console.log('componentresize')
-            })
+
 
             // myPlayer.src({ type: 'video/mp4', src: '//vjs.zencdn.net/v/oceans.mp4' })
-            myPlayer.src({ type: 'application/x-mpegURL', src: '//test-streams.mux.dev/x36xhzz/x36xhzz.m3u8' })
-            myPlayer.ready(function () {
-                console.log('好了')
-                if (myPlayer.isFullscreen()) {
-                    myPlayer.exitFullscreen()
-                }
-            });
-            // console.log(myPlayer.isFullscreen())
+            // myPlayer.src({ type: '', src: '//test-streams.mux.dev/x36xhzz/x36xhzz.m3u8' })
+            let mp = new MuiPlayer({
+                container: '#mui-player',
+                title: '标题',
+                src: '//test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+                parse: {
+                    type: 'hls',
+                    loader: Hls,
+                    config: { // hls config to：https://github.com/video-dev/hls.js/blob/HEAD/docs/API.md#fine-tuning
+                        debug: false,
+                    },
+                },
+            })
+            console.log(mp)
         })
         return { options }
     }
@@ -90,13 +89,7 @@ export default {
     height: 250px;
 }
 
-:deep(.video-js .vjs-big-play-button) {
-    top: 0;
-    left: 0;
-    /* left: 10px;
-    
-    /* width: 20%; */
-    width: 20%;
-    margin: 100px 40%;
+:deep(#mui-player) {
+    height: 250px !important;
 }
 </style>
