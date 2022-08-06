@@ -1,17 +1,23 @@
 <template>
     <div>
-        <videoPlay v-if="options.src" ref="videoRef" v-bind="options" :src="options.src" :type="options.type"
-            :poster='options.poster' />
+        <!-- <videoPlay v-if="options.src" ref="videoRef" v-bind="options" :src="options.src" :type="options.type"
+            :poster='options.poster' /> -->
+        <div id="mui-player"></div>
     </div>
 </template>
 <script>
 
 import "vue3-video-play/dist/style.css" // 引入css
-import { videoPlay } from "vue3-video-play" // 引入组件
+// import { videoPlay } from "vue3-video-play" // 引入组件
 import { onMounted, reactive } from 'vue'
+// 使用模块管理器引入插件
+import 'mui-player/dist/mui-player.min.css'
+import MuiPlayer from 'mui-player'
+import Hls from 'hls.js'
+
 export default {
     components: {
-        videoPlay,
+        // videoPlay,
     },
     setup() {
         const options = reactive({
@@ -36,6 +42,21 @@ export default {
         }
         onMounted(function () {
             options.src = getQueryVariable('src')
+            new MuiPlayer({
+                container: '#mui-player',
+                title: options.title,
+                src: options.src,
+                plugins: [
+
+                ],
+                parse: {
+                    type: 'hls',
+                    loader: Hls,
+                    config: { // hls config to：https://github.com/video-dev/hls.js/blob/HEAD/docs/API.md#fine-tuning
+                        debug: false,
+                    },
+                },
+            })
         })
         return { options }
     }
