@@ -62,9 +62,16 @@ export default {
             options.src = getQueryVariable('src')
             new MuiPlayer({
                 container: '#mui-player',
-                poster:'https://i.ytimg.com/vi/nhUNJhM_NAk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAsb3JqJRzblxGurHeuZ7RQGiWq1w',
+                poster: 'https://i.ytimg.com/vi/nhUNJhM_NAk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAsb3JqJRzblxGurHeuZ7RQGiWq1w',
                 title: '标题',
                 src: '//test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+                autoplay: true,
+                dragSpotShape: "square",
+                videoAttribute: [
+                    { attrKey: 'webkit-playsinline', attrValue: 'webkit-playsinline' },
+                    { attrKey: 'playsinline', attrValue: 'playsinline' },
+                    { attrKey: 'x5-video-player-type', attrValue: 'h5-page' },
+                ],
                 parse: {
                     type: 'hls',
                     loader: Hls,
@@ -73,11 +80,6 @@ export default {
                     },
                 },
             })
-            let videoBox = document.getElementsByTagName("video")[0]
-            if (videoBox) {
-                videoBox.setAttribute('webkit-playsinline', true)
-                videoBox.setAttribute('playsinline', true)
-            }
         })
         return { options }
 
@@ -93,5 +95,9 @@ export default {
 
 :deep(#mui-player) {
     height: 250px !important;
+}
+
+:deep(.mplayer-header .title-groupt .back-button svg) {
+    display: none;
 }
 </style>
