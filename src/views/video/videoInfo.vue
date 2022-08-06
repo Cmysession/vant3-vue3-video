@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id="mui-player"></div>
+        <div id="mui-player" controls="controls"></div>
     </div>
 </template>
 <script>
@@ -60,25 +60,26 @@ export default {
         }
         onMounted(function () {
             options.src = getQueryVariable('src')
-
-
-            // myPlayer.src({ type: 'video/mp4', src: '//vjs.zencdn.net/v/oceans.mp4' })
-            // myPlayer.src({ type: '', src: '//test-streams.mux.dev/x36xhzz/x36xhzz.m3u8' })
-            let mp = new MuiPlayer({
+            new MuiPlayer({
                 container: '#mui-player',
                 title: '标题',
                 src: '//test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
                 parse: {
                     type: 'hls',
                     loader: Hls,
-                    config: { // hls config to：https://github.com/video-dev/hls.js/blob/HEAD/docs/API.md#fine-tuning
+                    config: {
                         debug: false,
                     },
                 },
             })
-            console.log(mp)
+            let videoBox = document.getElementsByTagName("video")[0]
+            if (videoBox) {
+                videoBox.setAttribute('webkit-playsinline', true)
+                videoBox.setAttribute('playsinline', true)
+            }
         })
         return { options }
+
     }
 }
 </script>
