@@ -240,7 +240,11 @@ export default {
          * @param {*} item 
          */
         const toLink = function (link) {
-            window.open('//' + link, link)
+            router.push({
+                name: 'link-view', query: {
+                    link: link
+                }
+            })
         }
 
         const getInfo = function () {

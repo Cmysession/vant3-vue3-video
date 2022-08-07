@@ -97,6 +97,13 @@ const routes = [
     meta: { keepAlive: false, scrollTop: 0 },
   },
 
+  {
+    path: '/link', // 广告页
+    name: 'link-view',
+    component: () => import(/* webpackChunkName: "LinkView" */ '../views/link/linkView.vue'),
+    meta: { keepAlive: false, scrollTop: 0 },
+  },
+
 ]
 
 const router = createRouter({
