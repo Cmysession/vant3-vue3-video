@@ -50,6 +50,6 @@ export default {
 #body-box,#iframe-box{
     width: 100%;
     height: 100vh;
-    background: red;
+    background: #212121;
 }
 </style>
