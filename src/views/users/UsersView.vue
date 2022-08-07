@@ -36,7 +36,7 @@
                     </van-cell-group>
 
                     <van-cell-group inset>
-                        <van-cell icon="service-o" title="联系客服" is-link to="/" />
+                        <van-cell icon="service-o" title="联系客服" is-link to="/serve" />
                     </van-cell-group>
 
                     <van-cell-group inset>

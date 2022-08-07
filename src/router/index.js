@@ -104,6 +104,13 @@ const routes = [
     meta: { keepAlive: false, scrollTop: 0 },
   },
 
+  {
+    path: '/serve', // 客服
+    name: 'serve-view',
+    component: () => import(/* webpackChunkName: "ServeView" */ '../views/link/ServeView.vue'),
+    meta: { keepAlive: true, scrollTop: 0 },
+  },
+
 ]
 
 const router = createRouter({
