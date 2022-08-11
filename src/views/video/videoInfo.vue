@@ -43,7 +43,7 @@ export default {
                 container: '#mui-player',
                 poster: 'https://i.ytimg.com/vi/nhUNJhM_NAk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAsb3JqJRzblxGurHeuZ7RQGiWq1w',
                 title: '标题',
-                src: '//test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+                src: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
                 autoplay: true,
                 dragSpotShape: "square",
                 videoAttribute: [
