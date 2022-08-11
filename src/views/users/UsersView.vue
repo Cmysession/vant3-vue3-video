@@ -28,7 +28,7 @@
                     </van-cell-group>
 
                     <van-cell-group inset>
-                        <van-cell icon="certificate" title="绑定账号" is-link to="/bind-user" />
+                        <van-cell icon="certificate" title="设置账号" is-link to="/bind-user" />
                     </van-cell-group>
 
                     <van-cell-group inset>

@@ -8,7 +8,8 @@
             </div>
 
             <div id="videoInfo">
-                <iframe :src="init.iframeSrc" style="width:100%;height:250px" frameborder="0"></iframe>
+                <iframe v-if="!init.rowData.vip" :src="init.iframeSrc" style="width:100%;height:250px" frameborder="0"></iframe>
+                <span  v-if="init.rowData.vip" class="reload-box" @click="onClickRight">视频未显示请点击刷新</span>
             </div>
         </div>
 
@@ -34,7 +35,10 @@
                 <van-tag color="#ffe1e1" size="large" text-color="#ad0000">标签</van-tag>
                 <van-tag color="#ffe1e1" size="large" text-color="#ad0000">标签</van-tag>
             </div>
-
+            <div class="ad-box">
+                <img :src="init.ad.cover"
+                    @click="rowInfo(init.ad)">
+            </div>
             <div id="recommend-box">
                 <div class="recommend-title">
                     推荐其他
@@ -92,6 +96,13 @@ export default {
             rowData: {},
             iframeSrc: '',
             backNum: 1,
+            ad: {
+                cover: 'https://img2.baidu.com/it/u=2079865906,1441946078&fm=253&fmt=auto&app=138&f=JPEG?w=1280&h=479',
+                title: '小米34寸带鱼屏显示器对比体验，不输三星和宏碁，看完就知道该买谁了！',
+                is_ad: true,// 是否广告
+                jump_out: true, //  外跳。内跳
+                link: 'www.baidu.com',
+            },
             dataLists: [
                 {
                     cover: 'https://i.ytimg.com/vi/q2zj74iK1MI/hqdefault.jpg',
@@ -409,6 +420,9 @@ export default {
     border-radius: 5px;
 }
 
+.reload-box{
+    line-height: 250px;
+}
 #list-box .cover-box .vip-box {
     position: absolute;
     top: 10px;
@@ -430,6 +444,19 @@ export default {
     -webkit-line-clamp: 2;
     overflow: hidden;
     -webkit-box-orient: vertical;
+}
+
+.ad-box {
+    height: 80px;
+    width: 100%;
+    border-radius: 10px;
+    margin: 5px 0;
+}
+
+.ad-box img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
 }
 
 #list-box .info-box {
