@@ -328,7 +328,7 @@ export default {
     border-top: 1px inset #757575;
     /* height: 48px; */
     height: 6vh;
-    text-align: center;
+    /* text-align: center; */
     white-space: nowrap;
     overflow-x: scroll;
     overflow-y: hidden;
