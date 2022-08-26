@@ -28,6 +28,10 @@
             <!-- 内容页面 -->
             <div id="data-list-box" @scroll="dataScroll">
                 <van-list v-model:loading="init.loading" :finished="init.finished" finished-text="没有更多了" @load="onLoad">
+                 <!-- <div class="item-box"> -->
+                    <!-- 推荐 logo -->
+                    
+                 <!-- </div> -->
                     <div class="item-box" v-for="(item, index) in init.dataLists" :key="index" @click="rowInfo(item)">
                         <div class="cover-box">
                             <img :src="item.cover">
