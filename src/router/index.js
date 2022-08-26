@@ -31,6 +31,8 @@ const routes = [
         meta: { keepAlive: true, scrollTop: 0 },
         // 路由独享守卫
         beforeEnter: (to, from) => {
+          console.log(to)
+          // console.log(from)
           // 搜索时当前页面要刷新
           if (from.path === "/search") {
             to.meta.keepAlive = false

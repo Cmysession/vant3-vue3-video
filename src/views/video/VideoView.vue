@@ -8,8 +8,9 @@
             </div>
 
             <div id="videoInfo">
-                <iframe v-if="!init.rowData.vip" :src="init.iframeSrc" style="width:100%;height:250px" frameborder="0"></iframe>
-                <span  v-if="init.rowData.vip" class="reload-box" @click="onClickRight">视频未显示请点击刷新</span>
+                <iframe v-if="!init.rowData.vip" :src="init.iframeSrc" style="width:100%;height:250px"
+                    frameborder="0"></iframe>
+                <span v-if="init.rowData.vip" class="reload-box" @click="onClickRight">视频未显示请点击刷新</span>
             </div>
         </div>
 
@@ -29,16 +30,30 @@
                 </van-row>
             </div>
             <div class="tags-box">
-                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">标签</van-tag>
-                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">标签</van-tag>
-                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">标签</van-tag>
-                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">标签</van-tag>
-                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">标签</van-tag>
+                <van-tag color="#FFFFFF" size="large" @click="onSearch('变迁')" text-color="#000000">标签</van-tag>
+                <van-tag color="#FFFFFF" size="large" @click="onSearch('标签')" text-color="#000000">标签</van-tag>
+                <van-tag color="#FFFFFF" size="large" text-color="#000000">标签</van-tag>
+                <van-tag color="#FFFFFF" size="large" text-color="#000000">标签</van-tag>
+                <van-tag color="#FFFFFF" size="large" text-color="#000000">标签</van-tag>
+                <van-tag color="#FFFFFF" size="large" text-color="#000000">标签</van-tag>
             </div>
             <div class="ad-box">
-                <img :src="init.ad.cover"
-                    @click="rowInfo(init.ad)">
+                <img :src="init.ad.cover" @click="rowInfo(init.ad)">
             </div>
+            <div class="tags-box">
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">百度一下</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">百度一下</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">百度一下</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">百度一下</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">百度一下</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">百度一下</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">百度一下</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">百度一下</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">百度一下</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">百度一下</van-tag>
+                <van-tag color="#ffe1e1" size="large" text-color="#ad0000">百度一下</van-tag>
+            </div>
+
             <div id="recommend-box">
                 <div class="recommend-title">
                     推荐其他
@@ -80,8 +95,7 @@ import { getData, setData } from '@/tools/DataInfo'
 import 'vant/es/dialog/style'
 import { Dialog } from 'vant'
 import { onMounted, reactive } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { onBeforeRouteUpdate } from "vue-router"
+import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
 
 export default {
     components: {
@@ -171,7 +185,6 @@ export default {
             init.backNum += 1
             // 当更URL换时重新获取数据
             init.rowData = getData(to.query.row)
-            console.log(init.rowData)
             init.dataLists = []
             if (init.rowData.vip) {
                 Dialog.alert({
@@ -258,9 +271,15 @@ export default {
             })
         }
 
+        /**
+         * 点击搜索
+         */
+        const onSearch = function (row) {
+            router.replace({ name: 'search-view', query: { search: row } })
+        }
+
         const getInfo = function () {
             init.rowData = getData(route.query.row)
-            console.log(init.rowData)
             if (init.rowData.vip) {
                 Dialog.alert({
                     message: '此视频需要开通会员！',
@@ -277,7 +296,7 @@ export default {
             getInfo()
         })
         return {
-            init, onClickLeft, onLoad, rowInfo, onClickRight
+            init, onClickLeft, onLoad, rowInfo, onClickRight, onSearch
         }
     }
 }
@@ -420,9 +439,10 @@ export default {
     border-radius: 5px;
 }
 
-.reload-box{
+.reload-box {
     line-height: 250px;
 }
+
 #list-box .cover-box .vip-box {
     position: absolute;
     top: 10px;

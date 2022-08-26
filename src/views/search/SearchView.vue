@@ -27,8 +27,8 @@
         <div id="tags" class="bot-co">
             <div class="title">推荐标签</div>
             <div>
-                <van-tag @click="onClickTages(item)" color="#ffe1e1" v-for="(item, index) in init.tags" :key="index" size="large"
-                    text-color="#ad0000"> #{{ item.name }}</van-tag>
+                <van-tag @click="onClickTages(item)" color="#FFFFFF" v-for="(item, index) in init.tags" :key="index" size="large"
+                    text-color="#000000"> #{{ item.name }}</van-tag>
             </div>
         </div>
     </div>

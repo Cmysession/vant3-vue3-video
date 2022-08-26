@@ -28,10 +28,44 @@
             <!-- 内容页面 -->
             <div id="data-list-box" @scroll="dataScroll">
                 <van-list v-model:loading="init.loading" :finished="init.finished" finished-text="没有更多了" @load="onLoad">
-                 <!-- <div class="item-box"> -->
-                    <!-- 推荐 logo -->
-                    
-                 <!-- </div> -->
+                    <!-- 推荐 APP logo -->
+                    <div class="item-box">
+                        <div class="oth-apps">
+                            <div class="app-item">
+                                <div><img :src="init.logo" alt=""></div>
+                                <div class="app-item-name">雏菊APPAA</div>
+                            </div>
+                            <div class="app-item">
+                                <div><img :src="init.logo" alt=""></div>
+                                <div class="app-item-name">雏菊APPAA</div>
+                            </div>
+                            <div class="app-item">
+                                <div><img :src="init.logo" alt=""></div>
+                                <div class="app-item-name">雏菊APPAA</div>
+                            </div>
+                            <div class="app-item">
+                                <div><img :src="init.logo" alt=""></div>
+                                <div class="app-item-name">雏菊APPAA</div>
+                            </div>
+                            <div class="app-item">
+                                <div><img :src="init.logo" alt=""></div>
+                                <div class="app-item-name">雏菊APPAA</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- 推荐其他链接 -->
+                    <div class="item-box">
+                        <div class=".oth-links">
+                            <van-tag class="oth-links-item" color="#ffe1e1" size="large" text-color="#ad0000">百度一下</van-tag>
+                            <van-tag class="oth-links-item" color="#ffe1e1" size="large" text-color="#ad0000">百度一下百度一下</van-tag>
+                            <van-tag class="oth-links-item" color="#ffe1e1" size="large" text-color="#ad0000">百度一下百度一下</van-tag>
+                            <van-tag class="oth-links-item" color="#ffe1e1" size="large" text-color="#ad0000">百度一下</van-tag>
+                            <van-tag class="oth-links-item" color="#ffe1e1" size="large" text-color="#ad0000">百度一下APP</van-tag>
+                        </div>
+                    </div>
+
                     <div class="item-box" v-for="(item, index) in init.dataLists" :key="index" @click="rowInfo(item)">
                         <div class="cover-box">
                             <img :src="item.cover">
@@ -54,6 +88,7 @@
                             </van-button>
                         </div>
                     </div>
+
                 </van-list>
             </div>
         </div>
@@ -368,6 +403,34 @@ export default {
 #home-index-top .logo-box {
     position: absolute;
     left: 0;
+}
+
+.oth-apps {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.oth-apps .app-item {
+    width: 18%;
+    margin: 1%;
+    text-align: center;
+}
+
+.oth-apps .app-item img {
+    width: 100%;
+    border-radius: 10px;
+    background: rgba(199, 199, 199, 0.05);
+}
+
+.oth-apps .app-item .app-item-name {
+    font-size: 12px;
+    font-weight: bold;
+
+}
+
+.oth-links-item {
+    margin: 5px;
 }
 
 #home-index-top .logo-img {

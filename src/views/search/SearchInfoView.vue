@@ -8,8 +8,8 @@
                 <van-col span="16">
                     <!-- <van-field :disabled="true" class="field-box" v-model="init.searchValue" /> -->
                 </van-col>
-                <van-col span="4" @click="delSearchValue">
-                    <van-icon name="cross" />
+                <van-col span="4">
+                    <!-- <van-icon name="cross" /> -->
                 </van-col>
             </van-row>
         </header>
@@ -43,13 +43,18 @@
 
 <script>
 import { onMounted, reactive } from 'vue'
-import { onBeforeRouteLeave, useRoute, useRouter } from 'vue-router'
+import { onBeforeRouteLeave, useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
 import { getSessionItem, setData, setSessionItem } from '@/tools/DataInfo'
 
 export default {
     setup() {
         const route = useRoute()
         const router = useRouter()
+
+        onBeforeRouteUpdate((to) => {
+            console.log(to)
+        });
+
 
         const init = reactive({
             searchValue: '',
@@ -85,8 +90,7 @@ export default {
          */
         const onClickLeft = function () {
             router.replace({
-                name: 'search-view',
-                query: { search: init.searchValue }
+                name: 'search-view'
             })
         }
 
@@ -96,15 +100,6 @@ export default {
             setSessionItem('searchScrollTop', searchScrollTop)
         })
 
-        /**
-         * 清空搜索
-         * @param {*} row 
-         */
-        const delSearchValue = function () {
-            router.replace({
-                name: 'search-view',
-            })
-        }
 
 
         /**
@@ -138,7 +133,7 @@ export default {
             }
         })
 
-        return { init, onClickLeft, delSearchValue, onLoad, rowInfo }
+        return { init, onClickLeft, onLoad, rowInfo }
     },
     /**
      * 进来时执行
@@ -151,7 +146,7 @@ export default {
         if (searchScrollTop) {
             document.getElementById('search-list-box').scrollTop = searchScrollTop
         }
-    
+
         setSessionItem('searchScrollTop', 0)
     },
 }
@@ -171,7 +166,7 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
-        margin: 12px auto;
+    margin: 12px auto;
 }
 
 #search-body-box .header-box .van-col:nth-child(1) {
