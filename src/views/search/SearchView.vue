@@ -103,7 +103,7 @@ export default {
 
         onMounted(function () {
             if (route.query && route.query.search) {
-                init.searchValue = route.query.search
+                // init.searchValue = route.query.search
             }
         })
 
@@ -126,6 +126,7 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
+    margin: 5px auto;
 }
 
 #search-body-box .header-box .van-col:nth-child(1) {
@@ -147,9 +148,9 @@ export default {
     background: #3d3d3d;
 }
 
-.van-row {
+/* .van-row {
     margin-top: 10px;
-}
+} */
 
 :deep(.van-field__value) {
     overflow: inherit;

@@ -6,7 +6,7 @@
                     <van-icon name="arrow-left" />返回
                 </van-col>
                 <van-col span="16">
-                    <van-field :disabled="true" class="field-box" v-model="init.searchValue" />
+                    <!-- <van-field :disabled="true" class="field-box" v-model="init.searchValue" /> -->
                 </van-col>
                 <van-col span="4" @click="delSearchValue">
                     <van-icon name="cross" />
@@ -171,6 +171,7 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
+        margin: 12px auto;
 }
 
 #search-body-box .header-box .van-col:nth-child(1) {
@@ -186,10 +187,6 @@ export default {
     border-radius: 10px;
     height: 35px;
     background: #292929;
-}
-
-.van-row {
-    margin-top: 10px;
 }
 
 :deep(.van-field__value) {
