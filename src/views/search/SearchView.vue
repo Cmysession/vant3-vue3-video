@@ -103,7 +103,7 @@ export default {
 
         onMounted(function () {
             if (route.query && route.query.search) {
-                // init.searchValue = route.query.search
+                init.searchValue = route.query.search
             }
         })
 
